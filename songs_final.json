@@ -681,23 +681,18 @@
     "sections": [
       {
         "type": "verse",
-        "label": "Verse",
-        "text": "Blessed assurance, Jesus is mine: O what a foretaste of glory divine!\nHeir of salvation, purchase of God; Born of His Spirit, washed in His blood."
+        "label": "Verse 1",
+        "text": "[D]Blessed assurance, [A]Jesus is [D]mine!\nO what a [D7]foretaste of [G]glory di[D]vine!\n[D]Heir of sal[A]vation, pur[D]chase of God,\n[D7]Born of His [G]Spirit, washed [A]in His [A7]blood."
+      },
+      {
+        "type": "chorus",
+        "label": "Chorus",
+        "text": "[D]This is my [G]story, this is my [D]song,\n[D]Praising my [A]Savior [A7]all the day [D]long;\n[D]This is my [G]story, this is my [D]song,\n[D]Praising my [A7]Savior all the day [D]long."
       },
       {
         "type": "verse",
         "label": "Verse 2",
-        "text": "This is my story, this is my song, Praising my Saviour all the day long.\nThis is my story, this is my song, Praising my Saviour all the day long."
-      },
-      {
-        "type": "verse",
-        "label": "Verse 3",
-        "text": "Perfect submission, perfect delight, Visions of rapture burst on my sight;\nAngels descending bring from above Echoes of mercy, whispers of love."
-      },
-      {
-        "type": "verse",
-        "label": "Verse 4",
-        "text": "Perfect submission, all is at rest, I in my Saviour am happy and blessed;\nWatching and waiting, looking above, Filled with His goodness, lost in His love."
+        "text": "[D]Perfect sub[A]mission, per[D]fect delight,\n[D7]Visions of [G]rapture now [D]burst on my sight;\n[D]Angels des[A]cending, bring [D]from above,\n[D7]Echoes of [G]mercy, whis[A]pers of [A7]love."
       }
     ]
   },
@@ -2490,48 +2485,23 @@
     "sections": [
       {
         "type": "verse",
-        "label": "Verse",
-        "text": "O Lord my God! When I in awesome wonder,\nConsider all the work Thy hands have made;"
-      },
-      {
-        "type": "verse",
-        "label": "Verse 2",
-        "text": "I see the stars, I hear the rolling thunder,\nThy pow’r throughout The universe displayed."
+        "label": "Verse 1",
+        "text": "[G]O Lord my God, when I in [C]awesome wonder\n[G]Consider all the worlds Thy [D]hands have made,\n[G]I see the stars, I hear the [C]rolling thunder,\n[G]Thy power through[D]out the universe dis[G]played."
       },
       {
         "type": "chorus",
         "label": "Chorus",
-        "text": "Then sings my soul, My Saviour God to Thee;\nHow great Thou art, How great Thou art!"
+        "text": "[G]Then sings my soul, my [C]Savior God to [G]Thee:\n[G]How great Thou art, how [D]great Thou [D7]art!\n[G]Then sings my soul, my [C]Savior God to [G]Thee:\n[G]How great Thou [D]art, how great Thou [G]art!"
+      },
+      {
+        "type": "verse",
+        "label": "Verse 2",
+        "text": "[G]When through the woods and [C]forest glades I [G]wander,\nAnd [G]hear the birds sing [D]sweetly in the trees,\n[G]When I look down from [C]lofty mountain [G]grandeur,\nAnd [G]hear the brook and [D]feel the gentle [G]breeze."
       },
       {
         "type": "verse",
         "label": "Verse 3",
-        "text": "When through the woods And forest glades I wander\nAnd hear the birds Sing sweetly in the trees;"
-      },
-      {
-        "type": "verse",
-        "label": "Verse 4",
-        "text": "When I look down From lofty mountain grandeur\nAnd hear the brook And feel the gentle breeze."
-      },
-      {
-        "type": "verse",
-        "label": "Verse 5",
-        "text": "And when I think that God, His Son not sparing,\nSent Him to die, I scarce can take it in;"
-      },
-      {
-        "type": "verse",
-        "label": "Verse 6",
-        "text": "That on the cross, My burden gladly bearing,\nHe bled and died To take away my sin."
-      },
-      {
-        "type": "verse",
-        "label": "Verse 7",
-        "text": "When Christ shall come With shout of acclamation\nAnd take me home, What joy shall fill my heart!"
-      },
-      {
-        "type": "verse",
-        "label": "Verse 8",
-        "text": "Then I shall bow In humble adoration\nAnd there proclaim, My God, how great Thou art!"
+        "text": "[G]And when I think that [C]God, His Son not [G]sparing,\n[G]Sent Him to die, I [D]scarce can take it [D7]in;\n[G]That on the cross, my [C]burden gladly [G]bearing,\n[G]He bled and died to [D]take away my [G]sin."
       }
     ]
   },
@@ -8647,7 +8617,23 @@
     "title": "TRUST AND OBEY",
     "key": "F",
     "list": "worship,prayer",
-    "sections": []
+    "sections": [
+      {
+        "type": "verse",
+        "label": "Verse 1",
+        "text": "[G]When we walk with the [D]Lord in the [G]light of His word,\n[G]What a [C]glory He [G]sheds on our [D]way!\n[G]While we do His good [D]will, He a[G]bides with us still,\n[G]And with [C]all who will [D]trust and o[G]bey."
+      },
+      {
+        "type": "chorus",
+        "label": "Chorus",
+        "text": "[G]Trust and o[D]bey, for there's [G]no other way\n[G]To be [C]happy in [G]Jesus, but to [D7]trust and o[G]bey."
+      },
+      {
+        "type": "verse",
+        "label": "Verse 2",
+        "text": "[G]Not a shadow can [D]rise, not a [G]cloud in the skies,\n[G]But His [C]smile quickly [G]drives it a[D]way;\n[G]Not a doubt or a [D]fear, not a [G]sigh or a tear,\n[G]Can a[C]bide while we [D]trust and o[G]bey."
+      }
+    ]
   },
   {
     "title": "ABIDE WITH ME",
@@ -9132,38 +9118,23 @@
     "sections": [
       {
         "type": "verse",
-        "label": "Verse",
-        "text": "Amazing Grace! how sweet the sound\nThat saved a wretch like me;"
+        "label": "Verse 1",
+        "text": "[G]Amazing Grace! how [G7]sweet the [C]sound\nThat [G]saved a wretch like [Em]me;\n[G]I once was [G7]lost, but [C]now am [G]found,\nWas [D]blind but [D7]now I [G]see."
       },
       {
         "type": "verse",
         "label": "Verse 2",
-        "text": "’Twas grace that taught my heart to fear,\nAnd grace my fears relieved;"
+        "text": "[G]'Twas grace that [G7]taught my [C]heart to fear,\nAnd [G]grace my fears re[Em]lieved;\n[G]How precious [G7]did that [C]grace ap[G]pear,\nThe [D]hour I first be[G]lieved."
       },
       {
         "type": "verse",
         "label": "Verse 3",
-        "text": "Through many dangers, toils and snares\nI have already come;"
+        "text": "[G]Through many [G7]dangers, [C]toils and snares\nI [G]have already [Em]come;\n[G]'Tis grace has [G7]brought me [C]safe this [G]far,\nAnd [D]grace will lead me [G]home."
       },
       {
         "type": "verse",
         "label": "Verse 4",
-        "text": "The Lord has promised good to me,\nHis word my hope secures;"
-      },
-      {
-        "type": "verse",
-        "label": "Verse 5",
-        "text": "Yes, when this heart and flesh shall fail,\nAnd mortal life shall cease,"
-      },
-      {
-        "type": "verse",
-        "label": "Verse 6",
-        "text": "When we’ve been there a thousand years,\nBright shining as the sun,"
-      },
-      {
-        "type": "verse",
-        "label": "Verse 7",
-        "text": "We’ve no less days to sing God’s praise\nThan when we first begun."
+        "text": "[G]When we've been [G7]there ten [C]thousand years,\nBright [G]shining as the [Em]sun;\n[G]We've no less [G7]days to [C]sing God's [G]praise,\nThan [D]when we'd first be[G]gun."
       }
     ]
   },
@@ -9415,43 +9386,23 @@
     "sections": [
       {
         "type": "verse",
-        "label": "Verse",
-        "text": "Great is Thy faithfulness,O God my Father, \nThere is no shadow Of turning with Thee;"
-      },
-      {
-        "type": "verse",
-        "label": "Verse 2",
-        "text": "Thou changest not, Thy compassions, they fail not;\nAs Thou hast been Thou forever wilt be."
+        "label": "Verse 1",
+        "text": "[Eb]Great is Thy faith[Ab]fulness, O [Eb]God my Father,\n[Eb]There is no shadow of [Bb]turning with [Bb7]Thee;\n[Eb]Thou changest [Ab]not, Thy com[Eb]passions they fail not;\n[Eb]As Thou hast [Bb]been Thou for[Eb]ever wilt be."
       },
       {
         "type": "chorus",
         "label": "Chorus",
-        "text": "“Great is Thy faithfulness! Great is Thy faithfulness!”\nMorning by morning New mercies I see;"
+        "text": "[Eb]Great is Thy [Ab]faithfulness! [Eb]Great is Thy faithfulness!\n[Eb]Morning by [Bb]morning new [Eb]mercies I see;\n[Ab]All I have [Eb]needed Thy [C7]hand hath pro[Fm]vided,\n[Eb]Great is Thy [Bb]faithfulness, [Bb7]Lord, unto [Eb]me!"
       },
       {
-        "type": "chorus",
-        "label": "Chorus 2",
-        "text": "All I have needed Thy hand hath provided;\n“Great is Thy faithfulness,” Lord, unto me!"
+        "type": "verse",
+        "label": "Verse 2",
+        "text": "[Eb]Summer and [Ab]winter and [Eb]springtime and harvest,\n[Eb]Sun, moon and stars in their [Bb]courses a[Bb7]bove\n[Eb]Join with all [Ab]nature in [Eb]manifold witness\n[Eb]To Thy great [Bb]faithfulness, [Eb]mercy and love."
       },
       {
         "type": "verse",
         "label": "Verse 3",
-        "text": "Summer and winter, And springtime and harvest,\nSun, moon and stars In their courses above,"
-      },
-      {
-        "type": "verse",
-        "label": "Verse 4",
-        "text": "Join with all nature in manifold witness,  \nTo Thy great faithfulness, Mercy and love."
-      },
-      {
-        "type": "verse",
-        "label": "Verse 5",
-        "text": "Pardon for sin And a peace that endureth\nThine own dear presence To cheer and to guide;"
-      },
-      {
-        "type": "verse",
-        "label": "Verse 6",
-        "text": "Strength for today and Bright hope for tomorrow,\nBlessings all mine, With ten thousand beside"
+        "text": "[Eb]Pardon for [Ab]sin and a [Eb]peace that endureth,\n[Eb]Thine own dear presence to [Bb]cheer and to [Bb7]guide;\n[Eb]Strength for to[Ab]day and bright [Eb]hope for tomorrow,\n[Eb]Blessings all [Bb]mine, with ten [Eb]thousand beside!"
       }
     ]
   },
@@ -10100,63 +10051,18 @@
     "sections": [
       {
         "type": "verse",
-        "label": "Verse",
-        "text": "What a friend we have in Jesus,\nAll our sins and griefs to bear!"
+        "label": "Verse 1",
+        "text": "[F]What a Friend we have in [C]Jesus,\n[F]All our sins and griefs to [C7]bear!\n[F]What a privilege to [Bb]carry\n[F]Everything to [C7]God in [F]prayer!\n[F]O what peace we often [C]forfeit,\n[F]O what needless pain we [C7]bear,\n[F]All because we do not [Bb]carry\n[F]Everything to [C7]God in [F]prayer!"
       },
       {
         "type": "verse",
         "label": "Verse 2",
-        "text": "What a privilege to carry\nEverything to God in prayer!"
+        "text": "[F]Have we trials and temp[C]tations?\n[F]Is there trouble any[C7]where?\n[F]We should never be dis[Bb]couraged,\n[F]Take it to the [C7]Lord in [F]prayer.\n[F]Can we find a friend so [C]faithful,\n[F]Who will all our sorrows [C7]share?\n[F]Jesus knows our every [Bb]weakness,\n[F]Take it to the [C7]Lord in [F]prayer."
       },
       {
         "type": "verse",
         "label": "Verse 3",
-        "text": "O what peace we often forfeit,\nO what needless pain we bear,"
-      },
-      {
-        "type": "verse",
-        "label": "Verse 4",
-        "text": "All because we do not carry\nEverything to God in prayer!"
-      },
-      {
-        "type": "verse",
-        "label": "Verse 5",
-        "text": "Have we trials and temptations?\nIs there trouble anywhere?"
-      },
-      {
-        "type": "verse",
-        "label": "Verse 6",
-        "text": "We should never be discouraged,\nTake it to the Lord in prayer,"
-      },
-      {
-        "type": "verse",
-        "label": "Verse 7",
-        "text": "Can we find a friend so faithful,\nWho will all our sorrows share?"
-      },
-      {
-        "type": "verse",
-        "label": "Verse 8",
-        "text": "Jesus knows our every weakness,\nTake it to the lord in prayer."
-      },
-      {
-        "type": "verse",
-        "label": "Verse 9",
-        "text": "Are we weak and heavy laden,\nCumbered with a load of care?"
-      },
-      {
-        "type": "verse",
-        "label": "Verse 10",
-        "text": "Precious Saviour, still our refuge,\nTake it to the lord in prayer."
-      },
-      {
-        "type": "verse",
-        "label": "Verse 11",
-        "text": "Do thy friends despise, forsake thee?\nTake it to the lord in prayer;"
-      },
-      {
-        "type": "verse",
-        "label": "Verse 12",
-        "text": "In his arms he’ll take and shield thee,\nThou wilt find a solace there."
+        "text": "[F]Are we weak and heavy [C]laden,\n[F]Cumbered with a load of [C7]care?\n[F]Precious Savior, still our [Bb]refuge —\n[F]Take it to the [C7]Lord in [F]prayer.\n[F]Do thy friends despise, for[C]sake thee?\n[F]Take it to the Lord in [C7]prayer;\n[F]In His arms He'll take and [Bb]shield thee,\n[F]Thou wilt find a [C7]solace [F]there."
       }
     ]
   },
@@ -14419,48 +14325,23 @@
     "sections": [
       {
         "type": "verse",
-        "label": "Verse",
-        "text": "When peace like a river, attendeth my way,\nWhen sorrows like sea billows roll"
-      },
-      {
-        "type": "verse",
-        "label": "Verse 2",
-        "text": "Whatever my lot, thou hast taught me to say\nIt is well, it is well, with my soul."
+        "label": "Verse 1",
+        "text": "[C]When peace like a [F]river at[C]tendeth my way,\nWhen [C]sorrows like [Am]sea billows [G]roll;\n[C]Whatever my [F]lot, Thou hast [C]taught me to say,\n[G]It is well, it is [C]well with my [G7]soul."
       },
       {
         "type": "chorus",
         "label": "Chorus",
-        "text": "It is well (it is well)\nWith my soul (with my soul)\nIt is well, it is well with my soul."
+        "text": "[C]It is [F]well [C]with my soul,\n[G]It is [G7]well, it is [C]well with my [G7]soul."
+      },
+      {
+        "type": "verse",
+        "label": "Verse 2",
+        "text": "[C]Though Satan should [F]buffet, though [C]trials should come,\nLet [C]this blest as[Am]surance con[G]trol;\n[C]That Christ hath re[F]garded my [C]helpless estate,\n[G]And hath shed His own [C]blood for my [G7]soul."
       },
       {
         "type": "verse",
         "label": "Verse 3",
-        "text": "Though Satan should buffet, though trials should come,  \nLet this blest assurance control,"
-      },
-      {
-        "type": "verse",
-        "label": "Verse 4",
-        "text": "That Christ has regarded my helpless estate,\nAnd hath shed His own blood for my soul."
-      },
-      {
-        "type": "verse",
-        "label": "Verse 5",
-        "text": "My sin, oh, the bliss of this glorious thought\nMy sin, not in part but the whole,"
-      },
-      {
-        "type": "verse",
-        "label": "Verse 6",
-        "text": "Is nailed to the cross, and I bear it no more,\nPraise the Lord, praise the Lord, o my soul."
-      },
-      {
-        "type": "verse",
-        "label": "Verse 7",
-        "text": "And Lord, haste the day when my faith shall be sight, \nThe clouds be rolled back as a scroll;"
-      },
-      {
-        "type": "verse",
-        "label": "Verse 8",
-        "text": "The trumpet shall resound, And the Lord shall descend, \nEven so, it is well with my soul."
+        "text": "[C]My sin — oh, the [F]bliss of this [C]glorious thought —\nMy [C]sin, not in [Am]part, but the [G]whole;\n[C]Is nailed to the [F]cross and I [C]bear it no more,\n[G]Praise the Lord, praise the [C]Lord, O my [G7]soul!"
       }
     ]
   },
@@ -19007,7 +18888,23 @@
     "title": "Holy, Holy, Holy",
     "key": "D",
     "list": "prayer",
-    "sections": []
+    "sections": [
+      {
+        "type": "verse",
+        "label": "Verse 1",
+        "text": "[D]Holy, holy, [G]holy! Lord [D]God Al[A]mighty!\n[D]Early in the [A]morning our [D]song shall rise to [A]Thee;\n[D]Holy, holy, [G]holy! [D]Merciful and [Bm]mighty!\n[D]God in three [A]persons, [E7]blessed [A]Trinity!"
+      },
+      {
+        "type": "verse",
+        "label": "Verse 2",
+        "text": "[D]Holy, holy, [G]holy! All the [D]saints a[A]dore Thee,\n[D]Casting down their [A]golden crowns a[D]round the glassy [A]sea;\n[D]Cherubim and [G]seraphim [D]falling down be[Bm]fore Thee,\n[D]Who wert, and [A]art, and [E7]evermore shalt [A]be."
+      },
+      {
+        "type": "verse",
+        "label": "Verse 3",
+        "text": "[D]Holy, holy, [G]holy! Though the [D]darkness hide [A]Thee,\n[D]Though the eye of [A]sinful man Thy [D]glory may not [A]see;\n[D]Only Thou art [G]holy; there is [D]none beside [Bm]Thee,\n[D]Perfect in [A]power, in [E7]love, and pu[A]rity."
+      }
+    ]
   },
   {
     "title": "All Hail the Power of Jesus' Name",
@@ -19049,7 +18946,23 @@
     "title": "Blessed Be the Name",
     "key": "G",
     "list": "prayer",
-    "sections": []
+    "sections": [
+      {
+        "type": "verse",
+        "label": "Verse 1",
+        "text": "[G]All praise to Him who reigns a[C]bove\nIn [G]majesty su[D]preme,\n[G]Who gave His Son for [C]man to die,\n[G]That He might [D]man re[G]deem!"
+      },
+      {
+        "type": "chorus",
+        "label": "Chorus",
+        "text": "[G]Blessed be the name, blessed be the name,\n[G]Blessed be the [D]name of the [D7]Lord!\n[G]Blessed be the name, blessed be the name,\n[G]Blessed be the [D]name of the [G]Lord!"
+      },
+      {
+        "type": "verse",
+        "label": "Verse 2",
+        "text": "[G]His name above all [C]names shall stand,\nEx[G]alted more and [D]more,\n[G]At God the Father's [C]own right hand,\n[G]Where angel [D]hosts a[G]dore."
+      }
+    ]
   },
   {
     "title": "He Lives",
@@ -19061,7 +18974,28 @@
     "title": "Because He Lives",
     "key": "G",
     "list": "prayer",
-    "sections": []
+    "sections": [
+      {
+        "type": "verse",
+        "label": "Verse 1",
+        "text": "[G]God sent His son, they called Him [C]Jesus;\n[G]He came to love, heal [D]and forgive;\n[G]He lived and died to buy my [C]pardon,\nAn [G]empty grave is [D]there to prove my [G]Savior lives!"
+      },
+      {
+        "type": "chorus",
+        "label": "Chorus",
+        "text": "[G]Because He [C]lives, I can face to[G]morrow,\n[G]Because He [Em]lives, all [A7]fear is [D]gone;\n[G]Because I know [C]He holds the [G]future,\n[G]And life is [C]worth the [G]living [D]just be[G]cause He lives!"
+      },
+      {
+        "type": "verse",
+        "label": "Verse 2",
+        "text": "[G]How sweet to hold a newborn [C]baby,\nAnd [G]feel the pride and [D]joy He gives;\n[G]But greater still the calm as[C]surance,\nThis [G]child can face un[D]certain days be[G]cause He lives!"
+      },
+      {
+        "type": "verse",
+        "label": "Verse 3",
+        "text": "[G]And then one day I'll cross the [C]river,\nI'll [G]fight life's final [D]war with pain;\n[G]And then as death gives way to [C]victory,\nI'll [G]see the lights of [D]glory and I'll [G]know He reigns!"
+      }
+    ]
   },
   {
     "title": "Tell Me the Story of Jesus",
