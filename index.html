@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="CTCT Songbook">
+<meta name="theme-color" content="#1a1a2e">
+<link rel="manifest" href="manifest.json">
+<title>CTCT Choir Songbook</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  :root{
+    --bg:#0f0f1a;
+    --surface:#1a1a2e;
+    --surface2:#232340;
+    --accent:#7c6af7;
+    --accent2:#a594f9;
+    --text:#f0eeff;
+    --text2:#a09cc0;
+    --text3:#6b6590;
+    --border:#2e2e50;
+    --chorus:#f7a6b0;
+    --verse:#a8d8f0;
+    --bridge:#b8f0b8;
+    --radius:12px;
+    --fs-xs:11px;
+    --fs-sm:13px;
+    --fs-md:15px;
+    --fs-lg:18px;
+    --fs-xl:22px;
+  }
+  body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+  
+  /* TOP BAR */
+  #topbar{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border);padding:12px 16px 10px}
+  #topbar h1{font-size:var(--fs-sm);font-weight:600;color:var(--accent2);letter-spacing:.05em;text-transform:uppercase;margin-bottom:10px}
+  #search-wrap{position:relative}
+  #search{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:10px 16px 10px 40px;font-size:var(--fs-md);color:var(--text);outline:none;transition:border-color .2s}
+  #search:focus{border-color:var(--accent)}
+  #search::placeholder{color:var(--text3)}
+  .search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:16px;pointer-events:none}
+  #clear-btn{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text3);font-size:18px;cursor:pointer;display:none;line-height:1;padding:2px}
+
+  /* FILTER TABS */
+  #filters{display:flex;gap:8px;padding:10px 16px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--border);background:var(--bg)}
+  #filters::-webkit-scrollbar{display:none}
+  .filter-btn{white-space:nowrap;padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:var(--fs-sm);cursor:pointer;transition:all .2s}
+  .filter-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:500}
+
+  /* SONG LIST */
+  #list-view{padding:0}
+  #stats{padding:10px 16px 4px;font-size:var(--fs-xs);color:var(--text3)}
+  .song-item{display:flex;align-items:center;padding:14px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;gap:12px}
+  .song-item:active{background:var(--surface)}
+  .song-num{font-size:var(--fs-xs);color:var(--text3);min-width:20px;text-align:right}
+  .song-info{flex:1;min-width:0}
+  .song-title{font-size:var(--fs-md);font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .song-meta{display:flex;gap:6px;align-items:center;margin-top:3px}
+  .song-key{font-size:var(--fs-xs);font-weight:600;color:var(--accent2);background:rgba(124,106,247,.15);padding:2px 7px;border-radius:4px}
+  .song-tag{font-size:var(--fs-xs);color:var(--text3)}
+  .no-lyrics-dot{width:5px;height:5px;border-radius:50%;background:var(--text3);opacity:.4;flex-shrink:0}
+  .chevron{color:var(--text3);font-size:14px;margin-left:4px}
+
+  /* SONG VIEW */
+  #song-view{display:none;position:fixed;inset:0;background:var(--bg);z-index:200;overflow-y:auto;overscroll-behavior:contain}
+  #song-header{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--border);padding:12px 16px;z-index:10}
+  #back-btn{display:flex;align-items:center;gap:6px;background:none;border:none;color:var(--accent2);font-size:var(--fs-md);cursor:pointer;padding:0;margin-bottom:10px}
+  #song-title-display{font-size:var(--fs-xl);font-weight:700;color:var(--text);line-height:1.2}
+  #song-key-display{display:inline-block;margin-top:6px;font-size:var(--fs-sm);font-weight:600;color:var(--accent);background:rgba(124,106,247,.2);padding:3px 10px;border-radius:6px}
+  #song-lists{margin-top:6px;display:flex;gap:6px}
+  .list-badge{font-size:var(--fs-xs);color:var(--text3);background:var(--surface2);padding:2px 8px;border-radius:4px;text-transform:capitalize}
+  
+  /* LYRICS */
+  #lyrics-content{padding:16px}
+  .no-lyrics-msg{text-align:center;padding:40px 20px;color:var(--text3);font-size:var(--fs-md)}
+  .section-block{margin-bottom:24px}
+  .section-label{font-size:var(--fs-xs);font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;padding:3px 10px;border-radius:4px;display:inline-block}
+  .section-label.verse{color:var(--verse);background:rgba(168,216,240,.12)}
+  .section-label.chorus{color:var(--chorus);background:rgba(247,166,176,.12)}
+  .section-label.bridge{color:var(--bridge);background:rgba(184,240,184,.12)}
+  .section-label.pre-chorus{color:#f0d080;background:rgba(240,208,128,.12)}
+  .section-label.ending{color:var(--text2);background:rgba(160,156,192,.12)}
+  .section-text{font-size:17px;line-height:1.75;color:var(--text);white-space:pre-wrap;font-weight:400}
+
+  /* EMPTY STATE */
+  #empty-state{display:none;text-align:center;padding:60px 20px;color:var(--text3)}
+  #empty-state .icon{font-size:40px;margin-bottom:12px}
+  #empty-state p{font-size:var(--fs-md)}
+
+  /* FONT SIZE CONTROLS */
+  #font-controls{display:flex;align-items:center;gap:8px;margin-top:10px}
+  .font-btn{width:32px;height:32px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text2);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+  .font-btn:active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  #font-label{font-size:var(--fs-xs);color:var(--text3);margin:0 4px}
+</style>
+</head>
+<body>
+
+<!-- LIST VIEW -->
+<div id="list-view">
+  <div id="topbar">
+    <h1>&#9835; CTCT Choir Songbook</h1>
+    <div id="search-wrap">
+      <span class="search-icon">&#128269;</span>
+      <input id="search" type="search" placeholder="Search songs..." autocomplete="off" autocorrect="off">
+      <button id="clear-btn" onclick="clearSearch()">&#215;</button>
+    </div>
+  </div>
+  <div id="filters">
+    <button class="filter-btn active" data-filter="all">All Songs</button>
+    <button class="filter-btn" data-filter="praise">Praise</button>
+    <button class="filter-btn" data-filter="worship">Worship</button>
+    <button class="filter-btn" data-filter="has-lyrics">With Lyrics</button>
+  </div>
+  <div id="stats"></div>
+  <div id="song-list"></div>
+  <div id="empty-state">
+    <div class="icon">&#127925;</div>
+    <p>No songs found</p>
+  </div>
+</div>
+
+<!-- SONG VIEW -->
+<div id="song-view">
+  <div id="song-header">
+    <button id="back-btn" onclick="closeSong()">&#8592; Back</button>
+    <div id="song-title-display"></div>
+    <div>
+      <span id="song-key-display"></span>
+    </div>
+    <div id="song-lists"></div>
+    <div id="font-controls">
+      <button class="font-btn" onclick="changeFontSize(-1)">A&#8722;</button>
+      <span id="font-label">Aa</span>
+      <button class="font-btn" onclick="changeFontSize(1)">A+</button>
+    </div>
+  </div>
+  <div id="lyrics-content"></div>
+</div>
+
+<script>
+var SONGS = [];
+var filtered = [];
+var currentFilter = 'all';
+var fontSize = 17;
+
+fetch('songs_final.json')
+  .then(r => r.json())
+  .then(data => {
+    SONGS = data.sort((a,b) => a.title.localeCompare(b.title));
+    filtered = SONGS;
+    render();
+    document.getElementById('stats').textContent = SONGS.length + ' songs';
+  });
+
+function render() {
+  var list = document.getElementById('song-list');
+  var empty = document.getElementById('empty-state');
+  var stats = document.getElementById('stats');
+  
+  if (filtered.length === 0) {
+    list.innerHTML = '';
+    empty.style.display = 'block';
+    stats.textContent = 'No songs found';
+    return;
+  }
+  
+  empty.style.display = 'none';
+  stats.textContent = filtered.length + ' song' + (filtered.length !== 1 ? 's' : '');
+  
+  var html = filtered.map(function(song, i) {
+    var hasLyrics = song.sections && song.sections.length > 0;
+    var key = song.key ? '<span class="song-key">' + esc(song.key) + '</span>' : '';
+    var tags = '';
+    if (song.list) {
+      var lists = song.list.split(',');
+      tags = lists.map(function(l){ return '<span class="song-tag">' + l.trim() + '</span>'; }).join('');
+    }
+    var nolyricsdot = !hasLyrics ? '<span class="no-lyrics-dot"></span>' : '';
+    return '<div class="song-item" onclick="openSong(' + i + ')">' +
+      '<div class="song-num">' + (i+1) + '</div>' +
+      '<div class="song-info">' +
+        '<div class="song-title">' + esc(song.title) + '</div>' +
+        '<div class="song-meta">' + key + tags + nolyricsdot + '</div>' +
+      '</div>' +
+      '<span class="chevron">&#8250;</span>' +
+    '</div>';
+  }).join('');
+  
+  list.innerHTML = html;
+}
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// Search
+var searchInput = document.getElementById('search');
+var clearBtn = document.getElementById('clear-btn');
+searchInput.addEventListener('input', function() {
+  var q = this.value.trim().toLowerCase();
+  clearBtn.style.display = q ? 'block' : 'none';
+  applyFilter();
+});
+
+function clearSearch() {
+  searchInput.value = '';
+  clearBtn.style.display = 'none';
+  applyFilter();
+}
+
+// Filter tabs
+document.querySelectorAll('.filter-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+    this.classList.add('active');
+    currentFilter = this.dataset.filter;
+    applyFilter();
+  });
+});
+
+function applyFilter() {
+  var q = searchInput.value.trim().toLowerCase();
+  filtered = SONGS.filter(function(s) {
+    var matchesSearch = !q || s.title.toLowerCase().includes(q) || (s.key && s.key.toLowerCase().includes(q));
+    var matchesFilter = true;
+    if (currentFilter === 'praise') matchesFilter = s.list && s.list.includes('praise');
+    else if (currentFilter === 'worship') matchesFilter = s.list && s.list.includes('worship');
+    else if (currentFilter === 'has-lyrics') matchesFilter = s.sections && s.sections.length > 0;
+    return matchesSearch && matchesFilter;
+  });
+  render();
+}
+
+// Song view
+var currentSongIndex = -1;
+function openSong(idx) {
+  var song = filtered[idx];
+  currentSongIndex = idx;
+  
+  document.getElementById('song-title-display').textContent = song.title;
+  var keyEl = document.getElementById('song-key-display');
+  if (song.key) {
+    keyEl.textContent = song.key;
+    keyEl.style.display = 'inline-block';
+  } else {
+    keyEl.style.display = 'none';
+  }
+  
+  var listsEl = document.getElementById('song-lists');
+  if (song.list) {
+    listsEl.innerHTML = song.list.split(',').map(function(l){
+      return '<span class="list-badge">' + l.trim() + '</span>';
+    }).join('');
+  } else {
+    listsEl.innerHTML = '';
+  }
+  
+  renderLyrics(song);
+  
+  var sv = document.getElementById('song-view');
+  sv.style.display = 'block';
+  sv.scrollTop = 0;
+}
+
+function renderLyrics(song) {
+  var content = document.getElementById('lyrics-content');
+  content.style.fontSize = fontSize + 'px';
+  
+  if (!song.sections || song.sections.length === 0) {
+    content.innerHTML = '<div class="no-lyrics-msg">&#127925;<br><br>Lyrics not available for this song.<br><small style="margin-top:8px;display:block;font-size:13px">Title: ' + esc(song.title) + '</small></div>';
+    return;
+  }
+  
+  var html = song.sections.map(function(sec) {
+    var type = sec.type || 'verse';
+    var label = sec.label || type;
+    var text = sec.text.replace(/\n/g, '<br>');
+    return '<div class="section-block">' +
+      '<div class="section-label ' + type + '">' + esc(label) + '</div>' +
+      '<div class="section-text">' + text + '</div>' +
+    '</div>';
+  }).join('');
+  
+  content.innerHTML = html;
+}
+
+function closeSong() {
+  document.getElementById('song-view').style.display = 'none';
+}
+
+function changeFontSize(delta) {
+  fontSize = Math.min(24, Math.max(13, fontSize + delta));
+  var content = document.getElementById('lyrics-content');
+  content.style.fontSize = fontSize + 'px';
+}
+
+// Back gesture / button
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeSong();
+});
+
+// Service worker registration for offline
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(function(){});
+}
+</script>
+</body>
+</html>
