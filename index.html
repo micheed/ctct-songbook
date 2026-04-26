@@ -26,6 +26,7 @@
     --chorus:#f7a6b0;
     --verse:#a8d8f0;
     --bridge:#b8f0b8;
+    --hymn:#f0c878;
     --radius:12px;
     --fs-xs:11px;
     --fs-sm:13px;
@@ -50,6 +51,7 @@
   #filters::-webkit-scrollbar{display:none}
   .filter-btn{white-space:nowrap;padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:var(--fs-sm);cursor:pointer;transition:all .2s}
   .filter-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:500}
+  .filter-btn[data-filter="hymns"].active{background:#8a6e1a;border-color:var(--hymn)}
 
   /* SONG LIST */
   #list-view{padding:0}
@@ -59,9 +61,10 @@
   .song-num{font-size:var(--fs-xs);color:var(--text3);min-width:20px;text-align:right}
   .song-info{flex:1;min-width:0}
   .song-title{font-size:var(--fs-md);font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .song-meta{display:flex;gap:6px;align-items:center;margin-top:3px}
+  .song-meta{display:flex;gap:6px;align-items:center;margin-top:3px;flex-wrap:wrap}
   .song-key{font-size:var(--fs-xs);font-weight:600;color:var(--accent2);background:rgba(124,106,247,.15);padding:2px 7px;border-radius:4px}
   .song-tag{font-size:var(--fs-xs);color:var(--text3)}
+  .song-hymn-badge{font-size:var(--fs-xs);color:var(--hymn);background:rgba(240,200,120,.12);padding:2px 7px;border-radius:4px;font-weight:500}
   .no-lyrics-dot{width:5px;height:5px;border-radius:50%;background:var(--text3);opacity:.4;flex-shrink:0}
   .chevron{color:var(--text3);font-size:14px;margin-left:4px}
 
@@ -71,7 +74,8 @@
   #back-btn{display:flex;align-items:center;gap:6px;background:none;border:none;color:var(--accent2);font-size:var(--fs-md);cursor:pointer;padding:0;margin-bottom:10px}
   #song-title-display{font-size:var(--fs-xl);font-weight:700;color:var(--text);line-height:1.2}
   #song-key-display{display:inline-block;margin-top:6px;font-size:var(--fs-sm);font-weight:600;color:var(--accent);background:rgba(124,106,247,.2);padding:3px 10px;border-radius:6px}
-  #song-lists{margin-top:6px;display:flex;gap:6px}
+  #song-source-badge{display:none;margin-top:6px;margin-left:8px;font-size:var(--fs-xs);font-weight:500;color:var(--hymn);background:rgba(240,200,120,.15);padding:3px 10px;border-radius:6px;border:1px solid rgba(240,200,120,.25)}
+  #song-lists{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap}
   .list-badge{font-size:var(--fs-xs);color:var(--text3);background:var(--surface2);padding:2px 8px;border-radius:4px;text-transform:capitalize}
   
   /* LYRICS */
@@ -96,6 +100,9 @@
   .font-btn{width:32px;height:32px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text2);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
   .font-btn:active{background:var(--accent);color:#fff;border-color:var(--accent)}
   #font-label{font-size:var(--fs-xs);color:var(--text3);margin:0 4px}
+
+  /* Hymn source row */
+  #song-source-row{display:flex;align-items:center;margin-top:4px;gap:6px}
 </style>
 </head>
 <body>
@@ -114,6 +121,7 @@
     <button class="filter-btn active" data-filter="all">All Songs</button>
     <button class="filter-btn" data-filter="praise">Praise</button>
     <button class="filter-btn" data-filter="worship">Worship</button>
+    <button class="filter-btn" data-filter="hymns">&#127908; Hymns</button>
     <button class="filter-btn" data-filter="has-lyrics">With Lyrics</button>
   </div>
   <div id="stats"></div>
@@ -129,8 +137,9 @@
   <div id="song-header">
     <button id="back-btn" onclick="closeSong()">&#8592; Back</button>
     <div id="song-title-display"></div>
-    <div>
+    <div id="song-source-row">
       <span id="song-key-display"></span>
+      <span id="song-source-badge">&#127908; Cape Town Choir Songbook</span>
     </div>
     <div id="song-lists"></div>
     <div id="font-controls">
@@ -180,12 +189,13 @@ function render() {
       var lists = song.list.split(',');
       tags = lists.map(function(l){ return '<span class="song-tag">' + l.trim() + '</span>'; }).join('');
     }
+    var hymnBadge = song.source === 'ctct-songbook' ? '<span class="song-hymn-badge">&#127908; Hymn</span>' : '';
     var nolyricsdot = !hasLyrics ? '<span class="no-lyrics-dot"></span>' : '';
     return '<div class="song-item" onclick="openSong(' + i + ')">' +
       '<div class="song-num">' + (i+1) + '</div>' +
       '<div class="song-info">' +
         '<div class="song-title">' + esc(song.title) + '</div>' +
-        '<div class="song-meta">' + key + tags + nolyricsdot + '</div>' +
+        '<div class="song-meta">' + key + tags + hymnBadge + nolyricsdot + '</div>' +
       '</div>' +
       '<span class="chevron">&#8250;</span>' +
     '</div>';
@@ -230,6 +240,7 @@ function applyFilter() {
     var matchesFilter = true;
     if (currentFilter === 'praise') matchesFilter = s.list && s.list.includes('praise');
     else if (currentFilter === 'worship') matchesFilter = s.list && s.list.includes('worship');
+    else if (currentFilter === 'hymns') matchesFilter = s.source === 'ctct-songbook';
     else if (currentFilter === 'has-lyrics') matchesFilter = s.sections && s.sections.length > 0;
     return matchesSearch && matchesFilter;
   });
@@ -250,6 +261,10 @@ function openSong(idx) {
   } else {
     keyEl.style.display = 'none';
   }
+  
+  // Show hymn source badge if from Cape Town Choir Songbook
+  var sourceBadge = document.getElementById('song-source-badge');
+  sourceBadge.style.display = song.source === 'ctct-songbook' ? 'inline-block' : 'none';
   
   var listsEl = document.getElementById('song-lists');
   if (song.list) {
@@ -272,7 +287,10 @@ function renderLyrics(song) {
   content.style.fontSize = fontSize + 'px';
   
   if (!song.sections || song.sections.length === 0) {
-    content.innerHTML = '<div class="no-lyrics-msg">&#127925;<br><br>Lyrics not available for this song.<br><small style="margin-top:8px;display:block;font-size:13px">Title: ' + esc(song.title) + '</small></div>';
+    var sourceNote = song.source === 'ctct-songbook' 
+      ? '<small style="margin-top:12px;display:block;font-size:13px;color:var(--text3)">From the Cape Town Choir Songbook (No. ' + (song.pdf_num || '') + ')</small>'
+      : '';
+    content.innerHTML = '<div class="no-lyrics-msg">&#127925;<br><br>Lyrics not available for this song.<br><small style="margin-top:8px;display:block;font-size:13px">Title: ' + esc(song.title) + '</small>' + sourceNote + '</div>';
     return;
   }
   
