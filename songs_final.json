@@ -126,7 +126,7 @@
   {
     "title": "AND CAN IT BE",
     "key": "G",
-    "list": "praise,worship",
+    "list": "praise,worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -309,7 +309,7 @@
   {
     "title": "AT THE CROSS",
     "key": "Eb",
-    "list": "praise",
+    "list": "praise,prayer",
     "sections": [
       {
         "type": "verse",
@@ -677,7 +677,7 @@
   {
     "title": "BLESSED ASSURANCE",
     "key": "D",
-    "list": "praise,worship",
+    "list": "praise,worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -1008,7 +1008,7 @@
   {
     "title": "CLOSE TO THEE",
     "key": "C",
-    "list": "praise,worship",
+    "list": "praise,worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -2134,7 +2134,7 @@
   {
     "title": "HE LEADETH ME",
     "key": "D",
-    "list": "praise,worship",
+    "list": "praise,worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -2287,7 +2287,7 @@
   {
     "title": "HIGHER GROUND",
     "key": "G",
-    "list": "praise",
+    "list": "praise,prayer",
     "sections": [
       {
         "type": "verse",
@@ -5457,7 +5457,7 @@
   {
     "title": "REVIVE US AGAIN",
     "key": "G",
-    "list": "praise,worship",
+    "list": "praise,worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -6412,7 +6412,7 @@
   {
     "title": "SINCE JESUS CAME INTO MY HEART",
     "key": "Ab",
-    "list": "praise,worship",
+    "list": "praise,worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -6551,7 +6551,7 @@
   {
     "title": "STANDING ON THE PROMISES",
     "key": "Bb",
-    "list": "praise,worship",
+    "list": "praise,worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -6959,7 +6959,7 @@
   {
     "title": "THERE IS A FOUNTAIN",
     "key": "C",
-    "list": "praise,worship",
+    "list": "praise,worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -7644,7 +7644,7 @@
   {
     "title": "TO GOD BE THE GLORY",
     "key": "Ab",
-    "list": "praise,worship",
+    "list": "praise,worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -8646,13 +8646,13 @@
   {
     "title": "TRUST AND OBEY",
     "key": "F",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": []
   },
   {
     "title": "ABIDE WITH ME",
     "key": "Eb",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -8915,7 +8915,7 @@
   {
     "title": "NEAR THE CROSS",
     "key": "F",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -9071,7 +9071,7 @@
   {
     "title": "HE HIDETH MY SOUL",
     "key": "D",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -9128,7 +9128,7 @@
   {
     "title": "AMAZING GRACE",
     "key": "G",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -9170,7 +9170,7 @@
   {
     "title": "SWEET HOUR OF PRAYER",
     "key": "D",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -9237,7 +9237,7 @@
   {
     "title": "I LOVE TO TELL THE STORY",
     "key": "Ab",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -9359,7 +9359,7 @@
   {
     "title": "MY FAITH LOOKS UP TO THEE",
     "key": "Eb",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -9411,7 +9411,7 @@
   {
     "title": "GREAT IS THY FAITHFULNESS",
     "key": "Eb",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -9593,7 +9593,7 @@
   {
     "title": "I NEED THEE EVERY HOUR",
     "key": "Ab",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -9769,7 +9769,7 @@
   {
     "title": "JUST AS I AM",
     "key": "Eb",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -9816,7 +9816,7 @@
   {
     "title": "ROCK OF AGES",
     "key": "Bb",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -10096,7 +10096,7 @@
   {
     "title": "WHAT A FRIEND WE HAVE IN JESUS",
     "key": "F",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -10935,7 +10935,7 @@
   {
     "title": "SPIRIT OF THE LIVING GOD",
     "key": "F",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -11297,7 +11297,7 @@
   {
     "title": "I MUST TELL JESUS",
     "key": "Eb",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -11426,7 +11426,7 @@
   {
     "title": "I SURRENDER ALL",
     "key": "D",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -11799,7 +11799,7 @@
   {
     "title": "THE OLD RUGGED CROSS",
     "key": "Bb",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -12005,7 +12005,7 @@
   {
     "title": "MORE ABOUT JESUS",
     "key": "Ab",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -12181,7 +12181,7 @@
   {
     "title": "SOFTLY AND TENDERLY",
     "key": "Ab",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -12238,7 +12238,7 @@
   {
     "title": "DRAW ME NEARER",
     "key": "Ab",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -12647,7 +12647,7 @@
   {
     "title": "VICTORY IN JESUS",
     "key": "Ab",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -12800,7 +12800,7 @@
   {
     "title": "TURN YOUR EYES UPON JESUS",
     "key": "F",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -13191,7 +13191,7 @@
   {
     "title": "DAY BY DAY",
     "key": "Eb",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -14415,7 +14415,7 @@
   {
     "title": "IT IS WELL WITH MY SOUL",
     "key": "C",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -15661,7 +15661,7 @@
   {
     "title": "JESUS PAID IT ALL",
     "key": "Eb",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -15728,7 +15728,7 @@
   {
     "title": "GOD WILL TAKE CARE OF YOU",
     "key": "Bb",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": [
       {
         "type": "verse",
@@ -18405,14 +18405,14 @@
   {
     "title": "IMMORTAL, INVISIBLE, GOD ONLY WISE",
     "key": "G",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": [],
     "source": "ctct-songbook"
   },
   {
     "title": "PRAISE TO THE LORD, THE ALMIGHTY",
     "key": "F/F#",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": [],
     "source": "ctct-songbook"
   },
@@ -18734,7 +18734,7 @@
   {
     "title": "HAVE THINE OWN WAY, LORD",
     "key": "E/Eb",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": [],
     "source": "ctct-songbook"
   },
@@ -18874,7 +18874,7 @@
   {
     "title": "WHEN I SURVEY THE WONDROUS CROSS",
     "key": "Eb",
-    "list": "worship",
+    "list": "worship,prayer",
     "sections": [],
     "source": "ctct-songbook"
   },
@@ -18912,5 +18912,359 @@
     "list": "worship",
     "sections": [],
     "source": "ctct-songbook"
+  },
+  {
+    "title": "Take My Life and Let It Be",
+    "key": "D",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Nearer, My God, to Thee",
+    "key": "G",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Pass Me Not, O Gentle Savior",
+    "key": "G",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Be Thou My Vision",
+    "key": "D",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "He Touched Me",
+    "key": "G",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "My Jesus, I Love Thee",
+    "key": "G",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "O How I Love Jesus",
+    "key": "F",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "More Love to Thee, O Christ",
+    "key": "G",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Jesus, Keep Me Near the Cross",
+    "key": "F",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Come Thou Fount of Every Blessing",
+    "key": "G",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Lord, I Need Thee",
+    "key": "G",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "'Tis So Sweet to Trust in Jesus",
+    "key": "D",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "All to Jesus I Surrender",
+    "key": "D",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Nothing but the Blood",
+    "key": "G",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "In the Garden",
+    "key": "F",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Holy, Holy, Holy",
+    "key": "D",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "All Hail the Power of Jesus' Name",
+    "key": "D",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Crown Him with Many Crowns",
+    "key": "D",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Fairest Lord Jesus",
+    "key": "D",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Jesus Is All the World to Me",
+    "key": "G",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Savior, Like a Shepherd Lead Us",
+    "key": "D",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Leaning on the Everlasting Arms",
+    "key": "D",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Blessed Be the Name",
+    "key": "G",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "He Lives",
+    "key": "G",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Because He Lives",
+    "key": "G",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Tell Me the Story of Jesus",
+    "key": "F",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "There Shall Be Showers of Blessing",
+    "key": "D",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Come, Thou Almighty King",
+    "key": "F",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "O Worship the King",
+    "key": "D",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Guide Me, O Thou Great Jehovah",
+    "key": "G",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Be Still, My Soul",
+    "key": "D",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "His Eye Is on the Sparrow",
+    "key": "G",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Under His Wings",
+    "key": "F",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Hide Me, O My Savior",
+    "key": "F",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Whisper a Prayer",
+    "key": "C",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Give Me Oil in My Lamp",
+    "key": "G",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Open My Eyes, That I May See",
+    "key": "G",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Take Time to Be Holy",
+    "key": "F",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "O Sacred Head, Now Wounded",
+    "key": "Eb",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Alas! and Did My Savior Bleed",
+    "key": "D",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Breathe on Me, Breath of God",
+    "key": "D",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Spirit of God, Descend Upon My Heart",
+    "key": "D",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Come, Ye Sinners, Poor and Needy",
+    "key": "G",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Depth of Mercy",
+    "key": "F",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Jesus, Lover of My Soul",
+    "key": "G",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "O for a Thousand Tongues to Sing",
+    "key": "G",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Love Divine, All Loves Excelling",
+    "key": "F",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "I Heard the Voice of Jesus Say",
+    "key": "D",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Savior, Again to Thy Dear Name",
+    "key": "F",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Break Thou the Bread of Life",
+    "key": "G",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Fill My Cup, Lord",
+    "key": "G",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Come, Every Soul by Sin Oppressed",
+    "key": "G",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Redeemed, How I Love to Proclaim It",
+    "key": "A",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "There Is Power in the Blood",
+    "key": "G",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Are You Washed in the Blood",
+    "key": "D",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Wonderful Words of Life",
+    "key": "G",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "The Solid Rock (My Hope Is Built)",
+    "key": "D",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Take the Name of Jesus with You",
+    "key": "G",
+    "list": "prayer",
+    "sections": []
+  },
+  {
+    "title": "Jesus Calls Us",
+    "key": "D",
+    "list": "prayer",
+    "sections": []
   }
 ]

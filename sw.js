@@ -1,4 +1,4 @@
-var CACHE = 'ctct-songbook-v3';
+var CACHE = 'ctct-songbook-v4';
 var FILES = [
   '/ctct-songbook/',
   '/ctct-songbook/index.html',

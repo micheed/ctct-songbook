@@ -9,7 +9,6 @@
 <meta name="theme-color" content="#1a1a2e">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <title>CTCT Choir Songbook</title>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -27,6 +26,7 @@
     --verse:#a8d8f0;
     --bridge:#b8f0b8;
     --hymn:#f0c878;
+    --prayer:#c8a8f0;
     --radius:12px;
     --fs-xs:11px;
     --fs-sm:13px;
@@ -35,7 +35,7 @@
     --fs-xl:22px;
   }
   body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
-  
+
   /* TOP BAR */
   #topbar{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border);padding:12px 16px 10px}
   #topbar h1{font-size:var(--fs-sm);font-weight:600;color:var(--accent2);letter-spacing:.05em;text-transform:uppercase;margin-bottom:10px}
@@ -49,35 +49,59 @@
   /* FILTER TABS */
   #filters{display:flex;gap:8px;padding:10px 16px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--border);background:var(--bg)}
   #filters::-webkit-scrollbar{display:none}
-  .filter-btn{white-space:nowrap;padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:var(--fs-sm);cursor:pointer;transition:all .2s}
+  .filter-btn{white-space:nowrap;padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:var(--fs-sm);cursor:pointer;transition:all .2s;flex-shrink:0}
   .filter-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:500}
-  .filter-btn[data-filter="hymns"].active{background:#8a6e1a;border-color:var(--hymn)}
+  .filter-btn[data-filter="hymns"].active{background:rgba(160,120,20,.8);border-color:var(--hymn);color:var(--hymn)}
+  .filter-btn[data-filter="prayer"].active{background:rgba(100,60,160,.8);border-color:var(--prayer);color:var(--prayer)}
 
   /* SONG LIST */
-  #list-view{padding:0}
+  #song-list-wrap{padding:0}
   #stats{padding:10px 16px 4px;font-size:var(--fs-xs);color:var(--text3)}
   .song-item{display:flex;align-items:center;padding:14px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;gap:12px}
   .song-item:active{background:var(--surface)}
-  .song-num{font-size:var(--fs-xs);color:var(--text3);min-width:20px;text-align:right}
+  .song-num{font-size:var(--fs-xs);color:var(--text3);min-width:22px;text-align:right;flex-shrink:0}
   .song-info{flex:1;min-width:0}
   .song-title{font-size:var(--fs-md);font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .song-meta{display:flex;gap:6px;align-items:center;margin-top:3px;flex-wrap:wrap}
+  .song-meta{display:flex;gap:5px;align-items:center;margin-top:4px;flex-wrap:wrap}
   .song-key{font-size:var(--fs-xs);font-weight:600;color:var(--accent2);background:rgba(124,106,247,.15);padding:2px 7px;border-radius:4px}
-  .song-tag{font-size:var(--fs-xs);color:var(--text3)}
-  .song-hymn-badge{font-size:var(--fs-xs);color:var(--hymn);background:rgba(240,200,120,.12);padding:2px 7px;border-radius:4px;font-weight:500}
+  .song-tag{font-size:var(--fs-xs);color:var(--text3);padding:2px 6px;border-radius:4px;background:var(--surface2)}
+  .song-tag.prayer{color:var(--prayer);background:rgba(200,168,240,.1)}
+  .song-tag.hymns{color:var(--hymn);background:rgba(240,200,120,.1)}
   .no-lyrics-dot{width:5px;height:5px;border-radius:50%;background:var(--text3);opacity:.4;flex-shrink:0}
-  .chevron{color:var(--text3);font-size:14px;margin-left:4px}
+  .chevron{color:var(--text3);font-size:14px;margin-left:4px;flex-shrink:0}
 
   /* SONG VIEW */
   #song-view{display:none;position:fixed;inset:0;background:var(--bg);z-index:200;overflow-y:auto;overscroll-behavior:contain}
   #song-header{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--border);padding:12px 16px;z-index:10}
   #back-btn{display:flex;align-items:center;gap:6px;background:none;border:none;color:var(--accent2);font-size:var(--fs-md);cursor:pointer;padding:0;margin-bottom:10px}
   #song-title-display{font-size:var(--fs-xl);font-weight:700;color:var(--text);line-height:1.2}
-  #song-key-display{display:inline-block;margin-top:6px;font-size:var(--fs-sm);font-weight:600;color:var(--accent);background:rgba(124,106,247,.2);padding:3px 10px;border-radius:6px}
-  #song-source-badge{display:none;margin-top:6px;margin-left:8px;font-size:var(--fs-xs);font-weight:500;color:var(--hymn);background:rgba(240,200,120,.15);padding:3px 10px;border-radius:6px;border:1px solid rgba(240,200,120,.25)}
+
+  /* KEY ROW */
+  #key-row{display:flex;align-items:center;gap:8px;margin-top:8px;flex-wrap:wrap}
+  #song-key-display{font-size:var(--fs-sm);font-weight:700;color:#fff;background:var(--accent);padding:4px 12px;border-radius:6px;min-width:36px;text-align:center;transition:background .2s}
+  #song-source-badge{font-size:var(--fs-xs);font-weight:500;padding:3px 10px;border-radius:6px;display:none}
+  #song-source-badge.hymn{color:var(--hymn);background:rgba(240,200,120,.15);border:1px solid rgba(240,200,120,.25)}
+  #song-source-badge.prayer{color:var(--prayer);background:rgba(200,168,240,.15);border:1px solid rgba(200,168,240,.25)}
+
+  /* TRANSPOSE CONTROLS */
+  #transpose-row{display:flex;align-items:center;gap:6px;margin-top:8px}
+  #transpose-label{font-size:var(--fs-xs);color:var(--text3);margin-right:2px}
+  .transpose-btn{width:30px;height:30px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text2);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}
+  .transpose-btn:active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  #transpose-steps{font-size:var(--fs-xs);color:var(--text3);min-width:60px;text-align:center}
+  #reset-transpose{font-size:var(--fs-xs);color:var(--accent2);background:none;border:1px solid var(--border);border-radius:6px;padding:4px 8px;cursor:pointer;white-space:nowrap}
+  #reset-transpose:active{background:var(--surface2)}
+
   #song-lists{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap}
   .list-badge{font-size:var(--fs-xs);color:var(--text3);background:var(--surface2);padding:2px 8px;border-radius:4px;text-transform:capitalize}
-  
+  .list-badge.prayer{color:var(--prayer);background:rgba(200,168,240,.15)}
+
+  /* FONT SIZE CONTROLS */
+  #font-controls{display:flex;align-items:center;gap:8px;margin-top:8px}
+  .font-btn{width:30px;height:30px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text2);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+  .font-btn:active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  #font-label{font-size:var(--fs-xs);color:var(--text3);margin:0 2px}
+
   /* LYRICS */
   #lyrics-content{padding:16px}
   .no-lyrics-msg{text-align:center;padding:40px 20px;color:var(--text3);font-size:var(--fs-md)}
@@ -88,21 +112,18 @@
   .section-label.bridge{color:var(--bridge);background:rgba(184,240,184,.12)}
   .section-label.pre-chorus{color:#f0d080;background:rgba(240,208,128,.12)}
   .section-label.ending{color:var(--text2);background:rgba(160,156,192,.12)}
-  .section-text{font-size:17px;line-height:1.75;color:var(--text);white-space:pre-wrap;font-weight:400}
+  .section-text{line-height:1.75;color:var(--text);white-space:pre-wrap;font-weight:400}
+
+  /* Chord highlighting in lyrics */
+  .chord{color:var(--accent2);font-weight:700;font-size:.85em;font-family:'Courier New',monospace}
 
   /* EMPTY STATE */
   #empty-state{display:none;text-align:center;padding:60px 20px;color:var(--text3)}
   #empty-state .icon{font-size:40px;margin-bottom:12px}
   #empty-state p{font-size:var(--fs-md)}
 
-  /* FONT SIZE CONTROLS */
-  #font-controls{display:flex;align-items:center;gap:8px;margin-top:10px}
-  .font-btn{width:32px;height:32px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text2);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
-  .font-btn:active{background:var(--accent);color:#fff;border-color:var(--accent)}
-  #font-label{font-size:var(--fs-xs);color:var(--text3);margin:0 4px}
-
-  /* Hymn source row */
-  #song-source-row{display:flex;align-items:center;margin-top:4px;gap:6px}
+  /* Section divider in filters */
+  .filter-divider{width:1px;background:var(--border);height:20px;flex-shrink:0;margin:0 2px}
 </style>
 </head>
 <body>
@@ -113,15 +134,17 @@
     <h1>&#9835; CTCT Choir Songbook</h1>
     <div id="search-wrap">
       <span class="search-icon">&#128269;</span>
-      <input id="search" type="search" placeholder="Search songs..." autocomplete="off" autocorrect="off">
+      <input id="search" type="search" placeholder="Search songs, keys..." autocomplete="off" autocorrect="off">
       <button id="clear-btn" onclick="clearSearch()">&#215;</button>
     </div>
   </div>
   <div id="filters">
-    <button class="filter-btn active" data-filter="all">All Songs</button>
+    <button class="filter-btn active" data-filter="all">All</button>
     <button class="filter-btn" data-filter="praise">Praise</button>
     <button class="filter-btn" data-filter="worship">Worship</button>
     <button class="filter-btn" data-filter="hymns">&#127908; Hymns</button>
+    <button class="filter-btn" data-filter="prayer">&#128591; Prayer</button>
+    <div class="filter-divider"></div>
     <button class="filter-btn" data-filter="has-lyrics">With Lyrics</button>
   </div>
   <div id="stats"></div>
@@ -137,11 +160,24 @@
   <div id="song-header">
     <button id="back-btn" onclick="closeSong()">&#8592; Back</button>
     <div id="song-title-display"></div>
-    <div id="song-source-row">
+
+    <div id="key-row">
       <span id="song-key-display"></span>
-      <span id="song-source-badge">&#127908; Cape Town Choir Songbook</span>
+      <span id="song-source-badge"></span>
     </div>
+
+    <div id="transpose-row">
+      <span id="transpose-label">Transpose:</span>
+      <button class="transpose-btn" onclick="transpose(-1)">&#9837;</button>
+      <button class="transpose-btn" onclick="transpose(-1)" style="font-size:11px">&#8722;1</button>
+      <span id="transpose-steps">Original</span>
+      <button class="transpose-btn" onclick="transpose(1)" style="font-size:11px">+1</button>
+      <button class="transpose-btn" onclick="transpose(1)">&#9839;</button>
+      <button id="reset-transpose" onclick="resetTranspose()">Reset</button>
+    </div>
+
     <div id="song-lists"></div>
+
     <div id="font-controls">
       <button class="font-btn" onclick="changeFontSize(-1)">A&#8722;</button>
       <span id="font-label">Aa</span>
@@ -152,55 +188,123 @@
 </div>
 
 <script>
+// ─── DATA ───────────────────────────────────────────────────────────────────
 var SONGS = [];
 var filtered = [];
 var currentFilter = 'all';
 var fontSize = 17;
+var currentSong = null;
+var transposeSteps = 0;
 
+// ─── KEY TRANSPOSE ENGINE ────────────────────────────────────────────────────
+var CHROMATIC = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+var FLAT_MAP  = {'Db':'C#','Eb':'D#','Fb':'E','Gb':'F#','Ab':'G#','Bb':'A#','Cb':'B'};
+var PREFER_FLATS = ['F','Bb','Eb','Ab','Db','Gb']; // keys that prefer flat notation
+
+function noteIndex(note) {
+  var n = note.trim();
+  if (FLAT_MAP[n]) n = FLAT_MAP[n];
+  return CHROMATIC.indexOf(n);
+}
+
+function transposeNote(note, steps, preferFlat) {
+  var idx = noteIndex(note);
+  if (idx === -1) return note;
+  var newIdx = ((idx + steps) % 12 + 12) % 12;
+  var result = CHROMATIC[newIdx];
+  if (preferFlat && result.includes('#')) {
+    // Convert to flat equivalent
+    var flatEquiv = {
+      'C#':'Db','D#':'Eb','F#':'Gb','G#':'Ab','A#':'Bb'
+    };
+    result = flatEquiv[result] || result;
+  }
+  return result;
+}
+
+function transposeKey(keyStr, steps) {
+  if (!keyStr || steps === 0) return keyStr;
+  // Handle compound keys like "G/F" or "F/Eb"
+  if (keyStr.includes('/')) {
+    return keyStr.split('/').map(function(k) {
+      return transposeKey(k.trim(), steps);
+    }).join('/');
+  }
+  // Parse key: root + optional accidental + optional 'm' for minor
+  var m = keyStr.match(/^([A-G][b#]?)(m?)(.*)$/);
+  if (!m) return keyStr;
+  var root = m[1], suffix = m[2] + m[3];
+  // Determine if target key prefers flats
+  var newRoot = transposeNote(root, steps, true);
+  return newRoot + suffix;
+}
+
+function transposeLyricChords(text, steps) {
+  if (steps === 0) return text;
+  // Find chord patterns in text: [Am] [G] [F#m] etc.
+  return text.replace(/\[([A-G][b#]?[^\]]*)\]/g, function(match, chord) {
+    var m = chord.match(/^([A-G][b#]?)(.*)/);
+    if (!m) return match;
+    var newRoot = transposeNote(m[1], steps, true);
+    return '[' + newRoot + m[2] + ']';
+  });
+}
+
+// ─── LOAD DATA ───────────────────────────────────────────────────────────────
 fetch('songs_final.json')
-  .then(r => r.json())
-  .then(data => {
-    SONGS = data.sort((a,b) => a.title.localeCompare(b.title));
+  .then(function(r){ return r.json(); })
+  .then(function(data) {
+    SONGS = data.sort(function(a,b){ return a.title.localeCompare(b.title); });
     filtered = SONGS;
     render();
     document.getElementById('stats').textContent = SONGS.length + ' songs';
   });
 
+// ─── RENDER LIST ─────────────────────────────────────────────────────────────
 function render() {
   var list = document.getElementById('song-list');
   var empty = document.getElementById('empty-state');
   var stats = document.getElementById('stats');
-  
+
   if (filtered.length === 0) {
     list.innerHTML = '';
     empty.style.display = 'block';
     stats.textContent = 'No songs found';
     return;
   }
-  
+
   empty.style.display = 'none';
   stats.textContent = filtered.length + ' song' + (filtered.length !== 1 ? 's' : '');
-  
+
   var html = filtered.map(function(song, i) {
     var hasLyrics = song.sections && song.sections.length > 0;
     var key = song.key ? '<span class="song-key">' + esc(song.key) + '</span>' : '';
+
     var tags = '';
     if (song.list) {
       var lists = song.list.split(',');
-      tags = lists.map(function(l){ return '<span class="song-tag">' + l.trim() + '</span>'; }).join('');
+      tags = lists.map(function(l){
+        var lt = l.trim();
+        var cls = lt === 'prayer' ? ' prayer' : (song.source === 'ctct-songbook' ? ' hymns' : '');
+        return '<span class="song-tag' + cls + '">' + lt + '</span>';
+      }).join('');
     }
-    var hymnBadge = song.source === 'ctct-songbook' ? '<span class="song-hymn-badge">&#127908; Hymn</span>' : '';
+    if (song.source === 'ctct-songbook') {
+      tags += '<span class="song-tag hymns">hymn</span>';
+    }
+
     var nolyricsdot = !hasLyrics ? '<span class="no-lyrics-dot"></span>' : '';
+
     return '<div class="song-item" onclick="openSong(' + i + ')">' +
       '<div class="song-num">' + (i+1) + '</div>' +
       '<div class="song-info">' +
         '<div class="song-title">' + esc(song.title) + '</div>' +
-        '<div class="song-meta">' + key + tags + hymnBadge + nolyricsdot + '</div>' +
+        '<div class="song-meta">' + key + tags + nolyricsdot + '</div>' +
       '</div>' +
       '<span class="chevron">&#8250;</span>' +
     '</div>';
   }).join('');
-  
+
   list.innerHTML = html;
 }
 
@@ -208,12 +312,12 @@ function esc(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// Search
+// ─── SEARCH & FILTER ─────────────────────────────────────────────────────────
 var searchInput = document.getElementById('search');
 var clearBtn = document.getElementById('clear-btn');
+
 searchInput.addEventListener('input', function() {
-  var q = this.value.trim().toLowerCase();
-  clearBtn.style.display = q ? 'block' : 'none';
+  clearBtn.style.display = this.value.trim() ? 'block' : 'none';
   applyFilter();
 });
 
@@ -223,7 +327,6 @@ function clearSearch() {
   applyFilter();
 }
 
-// Filter tabs
 document.querySelectorAll('.filter-btn').forEach(function(btn) {
   btn.addEventListener('click', function() {
     document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
@@ -236,93 +339,155 @@ document.querySelectorAll('.filter-btn').forEach(function(btn) {
 function applyFilter() {
   var q = searchInput.value.trim().toLowerCase();
   filtered = SONGS.filter(function(s) {
-    var matchesSearch = !q || s.title.toLowerCase().includes(q) || (s.key && s.key.toLowerCase().includes(q));
+    var matchesSearch = !q ||
+      s.title.toLowerCase().includes(q) ||
+      (s.key && s.key.toLowerCase().includes(q)) ||
+      (s.list && s.list.toLowerCase().includes(q));
     var matchesFilter = true;
-    if (currentFilter === 'praise') matchesFilter = s.list && s.list.includes('praise');
-    else if (currentFilter === 'worship') matchesFilter = s.list && s.list.includes('worship');
-    else if (currentFilter === 'hymns') matchesFilter = s.source === 'ctct-songbook';
+    if      (currentFilter === 'praise')    matchesFilter = s.list && s.list.includes('praise');
+    else if (currentFilter === 'worship')   matchesFilter = s.list && s.list.includes('worship');
+    else if (currentFilter === 'prayer')    matchesFilter = s.list && s.list.includes('prayer');
+    else if (currentFilter === 'hymns')     matchesFilter = s.source === 'ctct-songbook';
     else if (currentFilter === 'has-lyrics') matchesFilter = s.sections && s.sections.length > 0;
     return matchesSearch && matchesFilter;
   });
   render();
 }
 
-// Song view
-var currentSongIndex = -1;
+// ─── SONG VIEW ───────────────────────────────────────────────────────────────
 function openSong(idx) {
-  var song = filtered[idx];
-  currentSongIndex = idx;
-  
-  document.getElementById('song-title-display').textContent = song.title;
-  var keyEl = document.getElementById('song-key-display');
-  if (song.key) {
-    keyEl.textContent = song.key;
-    keyEl.style.display = 'inline-block';
-  } else {
-    keyEl.style.display = 'none';
+  currentSong = filtered[idx];
+  transposeSteps = 0;
+
+  document.getElementById('song-title-display').textContent = currentSong.title;
+
+  updateKeyDisplay();
+  updateTransposeLabel();
+
+  // Source badge
+  var badge = document.getElementById('song-source-badge');
+  badge.className = 'song-source-badge';
+  badge.style.display = 'none';
+  if (currentSong.source === 'ctct-songbook') {
+    badge.textContent = '&#127908; Cape Town Choir Songbook';
+    badge.className = 'hymn';
+    badge.style.display = 'inline-block';
+  } else if (currentSong.list && currentSong.list.includes('prayer')) {
+    badge.textContent = '&#128591; Prayer Song';
+    badge.className = 'prayer';
+    badge.style.display = 'inline-block';
   }
-  
-  // Show hymn source badge if from Cape Town Choir Songbook
-  var sourceBadge = document.getElementById('song-source-badge');
-  sourceBadge.style.display = song.source === 'ctct-songbook' ? 'inline-block' : 'none';
-  
+
+  // List badges
   var listsEl = document.getElementById('song-lists');
-  if (song.list) {
-    listsEl.innerHTML = song.list.split(',').map(function(l){
-      return '<span class="list-badge">' + l.trim() + '</span>';
+  if (currentSong.list) {
+    listsEl.innerHTML = currentSong.list.split(',').map(function(l){
+      var lt = l.trim();
+      return '<span class="list-badge' + (lt === 'prayer' ? ' prayer' : '') + '">' + lt + '</span>';
     }).join('');
   } else {
     listsEl.innerHTML = '';
   }
-  
-  renderLyrics(song);
-  
+
+  renderLyrics();
+
   var sv = document.getElementById('song-view');
   sv.style.display = 'block';
   sv.scrollTop = 0;
 }
 
-function renderLyrics(song) {
+function updateKeyDisplay() {
+  var keyEl = document.getElementById('song-key-display');
+  var baseKey = currentSong ? currentSong.key : '';
+  if (baseKey) {
+    var transposed = transposeKey(baseKey, transposeSteps);
+    keyEl.textContent = transposed;
+    keyEl.style.display = 'inline-block';
+  } else {
+    keyEl.style.display = 'none';
+  }
+}
+
+function updateTransposeLabel() {
+  var label = document.getElementById('transpose-steps');
+  if (transposeSteps === 0) {
+    label.textContent = 'Original';
+    label.style.color = 'var(--text3)';
+  } else {
+    var sign = transposeSteps > 0 ? '+' : '';
+    label.textContent = sign + transposeSteps + ' semitone' + (Math.abs(transposeSteps) !== 1 ? 's' : '');
+    label.style.color = 'var(--accent2)';
+  }
+}
+
+function transpose(delta) {
+  transposeSteps = ((transposeSteps + delta + 12) % 12);
+  // Allow going negative too (keep range -6 to +6 for display)
+  if (transposeSteps > 6) transposeSteps = transposeSteps - 12;
+  updateKeyDisplay();
+  updateTransposeLabel();
+  renderLyrics();
+}
+
+function resetTranspose() {
+  transposeSteps = 0;
+  updateKeyDisplay();
+  updateTransposeLabel();
+  renderLyrics();
+}
+
+function renderLyrics() {
   var content = document.getElementById('lyrics-content');
   content.style.fontSize = fontSize + 'px';
-  
-  if (!song.sections || song.sections.length === 0) {
-    var sourceNote = song.source === 'ctct-songbook' 
-      ? '<small style="margin-top:12px;display:block;font-size:13px;color:var(--text3)">From the Cape Town Choir Songbook (No. ' + (song.pdf_num || '') + ')</small>'
+
+  if (!currentSong) return;
+
+  if (!currentSong.sections || currentSong.sections.length === 0) {
+    var sourceNote = currentSong.source === 'ctct-songbook'
+      ? '<small style="margin-top:12px;display:block;font-size:13px;color:var(--text3)">From the Cape Town Choir Songbook</small>'
       : '';
-    content.innerHTML = '<div class="no-lyrics-msg">&#127925;<br><br>Lyrics not available for this song.<br><small style="margin-top:8px;display:block;font-size:13px">Title: ' + esc(song.title) + '</small>' + sourceNote + '</div>';
+    content.innerHTML = '<div class="no-lyrics-msg">&#127925;<br><br>Lyrics not yet available for this song.<br><small style="margin-top:8px;display:block;font-size:13px">' + esc(currentSong.title) + '</small>' + sourceNote + '</div>';
     return;
   }
-  
-  var html = song.sections.map(function(sec) {
+
+  var html = currentSong.sections.map(function(sec) {
     var type = sec.type || 'verse';
     var label = sec.label || type;
-    var text = sec.text.replace(/\n/g, '<br>');
+    // Apply transpose to any inline chords, then render line breaks
+    var text = transposeLyricChords(sec.text, transposeSteps);
+    // Highlight inline chords [X]
+    text = text.replace(/\[([^\]]+)\]/g, '<span class="chord">[$1]</span>');
+    text = text.replace(/\n/g, '<br>');
     return '<div class="section-block">' +
-      '<div class="section-label ' + type + '">' + esc(label) + '</div>' +
+      '<div class="section-label ' + esc(type) + '">' + esc(label) + '</div>' +
       '<div class="section-text">' + text + '</div>' +
     '</div>';
   }).join('');
-  
+
   content.innerHTML = html;
 }
 
 function closeSong() {
   document.getElementById('song-view').style.display = 'none';
+  currentSong = null;
+  transposeSteps = 0;
 }
 
 function changeFontSize(delta) {
-  fontSize = Math.min(24, Math.max(13, fontSize + delta));
-  var content = document.getElementById('lyrics-content');
-  content.style.fontSize = fontSize + 'px';
+  fontSize = Math.min(26, Math.max(12, fontSize + delta));
+  document.getElementById('lyrics-content').style.fontSize = fontSize + 'px';
 }
 
-// Back gesture / button
+// Keyboard shortcuts
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeSong();
+  if (currentSong) {
+    if (e.key === 'ArrowUp')   transpose(1);
+    if (e.key === 'ArrowDown') transpose(-1);
+  }
 });
 
-// Service worker registration for offline
+// Service worker
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/ctct-songbook/sw.js', {scope: '/ctct-songbook/'}).catch(function(){});
 }
