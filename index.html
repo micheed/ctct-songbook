@@ -269,6 +269,80 @@ textarea.field-input{min-height:110px;resize:vertical;line-height:1.6}
 .modal-btn.confirm.blue{background:var(--blue2)}
 
 @media print{#nav-tabs,#songs-header,#song-hdr,.no-print{display:none!important}#setlist-view{display:block!important}body{background:#fff;color:#000}.sl-remove,.sl-drag{display:none}.sl-title{color:#000}.sl-key{color:#1565c0}}
+
+/* ── FAVOURITES / RECENT ── */
+.star-btn{background:none;border:none;font-size:18px;cursor:pointer;padding:4px;flex-shrink:0;transition:transform .2s;line-height:1}
+.star-btn:active{transform:scale(1.4)}
+.star-btn.starred{filter:drop-shadow(0 0 4px gold)}
+.recent-section{padding:10px 16px 0}
+.recent-label{font-size:var(--fs-xs);color:var(--text3);font-family:-apple-system,sans-serif;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.recent-chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:8px;border-bottom:1px solid var(--border);margin-bottom:0}
+.recent-chips::-webkit-scrollbar{display:none}
+.recent-chip{white-space:nowrap;padding:5px 12px;border-radius:20px;border:1px solid var(--border);background:var(--surface2);color:var(--text2);font-size:var(--fs-xs);cursor:pointer;font-family:-apple-system,sans-serif;flex-shrink:0;transition:all .15s}
+.recent-chip:active{background:var(--blue2);color:#fff;border-color:var(--blue2)}
+
+/* ── SETLIST NOTES ── */
+.sl-note-btn{background:none;border:none;color:var(--text3);font-size:14px;cursor:pointer;padding:4px 6px;flex-shrink:0;transition:color .15s}
+.sl-note-btn.has-note{color:var(--gold)}
+.sl-note-btn:active{color:var(--blue3)}
+.sl-note-expand{padding:0 16px 10px 58px;display:none}
+.sl-note-expand.open{display:block}
+.sl-note-textarea{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:7px;color:var(--text);font-family:inherit;font-size:var(--fs-xs);padding:8px 10px;outline:none;resize:none;min-height:54px;line-height:1.5;transition:border-color .2s}
+.sl-note-textarea:focus{border-color:var(--blue2)}
+.sl-note-textarea::placeholder{color:var(--text3)}
+
+/* ── DARK / LIGHT MODE ── */
+body.light{
+  --bg:#f5f5f0;--surface:#fff;--surface2:#f0ede8;--surface3:#e8e4de;
+  --text:#1a1a2e;--text2:#555;--text3:#999;--border:#ddd;
+  --chorus:#c0394a;--verse:#1565c0;--bridge:#2e7d32;
+}
+body.light #presentation-overlay{background:#000}
+body.light .song-key{color:#fff}
+#theme-toggle{position:fixed;bottom:80px;left:16px;z-index:100;width:40px;height:40px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(0,0,0,.3);transition:all .2s}
+#theme-toggle:active{transform:scale(.9)}
+
+/* ── REHEARSAL MODE ── */
+#rehearsal-bar{display:none;background:rgba(212,169,74,.12);border:1px solid rgba(212,169,74,.3);border-radius:8px;margin:10px 14px 0;padding:8px 12px;align-items:center;gap:8px}
+#rehearsal-bar.active{display:flex}
+.reh-label{font-size:var(--fs-xs);color:var(--gold);font-family:-apple-system,sans-serif;font-weight:600;flex:1}
+.reh-count{font-size:var(--fs-xl);font-weight:700;color:#fff;font-family:-apple-system,sans-serif;min-width:36px;text-align:center}
+.reh-btn{width:36px;height:36px;border-radius:8px;border:1px solid rgba(212,169,74,.4);background:rgba(212,169,74,.15);color:var(--gold);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:-apple-system,sans-serif}
+.reh-btn:active{background:var(--gold);color:#000}
+#reh-toggle{font-size:var(--fs-xs);padding:5px 10px;border-radius:6px;border:1px solid var(--border);background:var(--surface2);color:var(--text2);cursor:pointer;font-family:-apple-system,sans-serif;transition:all .15s;margin-top:8px;white-space:nowrap}
+#reh-toggle.active{border-color:var(--gold);color:var(--gold);background:rgba(212,169,74,.12)}
+#reh-section-name{font-size:var(--fs-xs);color:var(--text3);font-family:-apple-system,sans-serif}
+
+/* ── SECTION CLICK FOR REHEARSAL ── */
+.section-block{cursor:pointer;border-radius:8px;padding:8px;margin:0 -8px 20px;transition:background .15s}
+.section-block:hover{background:var(--surface2)}
+.section-block.rehearsing{background:rgba(212,169,74,.1);border:1px solid rgba(212,169,74,.3)}
+
+/* ── PDF EXPORT ── */
+@media print{
+  #nav-tabs,#songs-header,#song-hdr,#scroll-top-btn,#alpha-bar,#theme-toggle,
+  .no-print,#presentation-overlay,.song-action-btn,#song-action-row,
+  #transpose-row,#view-toggle-row{display:none!important}
+  #song-view{display:block!important;position:static!important;overflow:visible!important}
+  #lyrics-content{padding:0!important}
+  body{background:#fff!important;color:#000!important;font-size:12pt}
+  .section-label.verse{color:#1565c0!important;background:transparent!important}
+  .section-label.chorus{color:#c0394a!important;background:transparent!important}
+  .section-label.bridge{color:#2e7d32!important;background:transparent!important}
+  .section-text{color:#000!important;line-height:1.6!important}
+  .chord-span{color:#1565c0!important;background:transparent!important}
+  .section-block{break-inside:avoid;page-break-inside:avoid;cursor:default!important}
+  #setlist-view{display:block!important}
+  .sl-remove,.sl-drag,.sl-note-btn{display:none!important}
+  .sl-title{color:#000!important}.sl-key{color:#1565c0!important}
+  .sl-note-expand{display:block!important}
+  .sl-note-textarea{border:none!important;background:transparent!important;color:#000!important;resize:none!important;padding:0!important}
+  #print-header{display:block!important}
+}
+#print-header{display:none;text-align:center;padding:0 0 24px;font-family:serif}
+#print-header h2{font-size:22pt;color:#000;margin-bottom:4px}
+#print-header p{font-size:10pt;color:#555}
+#print-header .print-logo-text{font-size:14pt;font-weight:bold;letter-spacing:.05em}
 </style>
 </head>
 <body>
@@ -307,8 +381,13 @@ textarea.field-input{min-height:110px;resize:vertical;line-height:1.6}
       <button class="filter-btn" data-filter="hymns">🎙 Hymns</button>
       <button class="filter-btn" data-filter="prayer">🙏 Prayer</button>
       <button class="filter-btn" data-filter="has-chords">🎸 Chords</button>
+      <button class="filter-btn" data-filter="favourites">⭐ Favourites</button>
       <button class="filter-btn" data-filter="has-lyrics">With Lyrics</button>
     </div>
+  </div>
+  <div id="recent-section" class="recent-section" style="display:none">
+    <div class="recent-label">⏱ Recently Viewed</div>
+    <div class="recent-chips" id="recent-chips"></div>
   </div>
   <div id="stats"></div>
   <div id="song-list"></div>
@@ -341,6 +420,7 @@ textarea.field-input{min-height:110px;resize:vertical;line-height:1.6}
     <button class="sl-action-btn" id="start-setlist-btn" onclick="startSetlistPresentation()">▶ Present All</button>
     <button class="sl-action-btn" id="print-setlist-btn" onclick="window.print()">🖨 Print</button>
     <button class="sl-action-btn" id="share-setlist-btn" onclick="copySetlistText()">📋 Copy Text</button>
+    <button class="sl-action-btn" onclick="exportPDF()">📄 Export PDF</button>
   </div>
 </div>
 
@@ -523,9 +603,20 @@ textarea.field-input{min-height:110px;resize:vertical;line-height:1.6}
         <button class="font-btn" onclick="changeFontSize(1)">A+</button>
       </div>
     </div>
+    <div id="rehearsal-bar">
+      <div style="flex:1">
+        <div class="reh-label">🔁 Rehearsal Mode</div>
+        <div id="reh-section-name" class="reh-section-name">—</div>
+      </div>
+      <button class="reh-btn" onclick="rehReset()">↺</button>
+      <div class="reh-count" id="reh-count">0</div>
+      <button class="reh-btn" onclick="rehTick()">+1</button>
+    </div>
     <div id="song-action-row">
       <button class="song-action-btn" id="add-to-setlist-btn" onclick="addToSetlist()">+ Add to Setlist</button>
       <button class="song-action-btn" onclick="presentCurrentSong()">▶ Present</button>
+      <button id="reh-toggle" onclick="toggleRehearsal()">🔁 Rehearse</button>
+      <button class="star-btn" id="star-btn" onclick="toggleFavourite()" title="Favourite">☆</button>
       <button class="song-action-btn danger" id="delete-song-btn" onclick="deleteSong()" style="display:none">🗑 Delete</button>
     </div>
   </div>
@@ -565,6 +656,12 @@ textarea.field-input{min-height:110px;resize:vertical;line-height:1.6}
 </div></div>
 
 <div id="toast"></div>
+<button id="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark">🌙</button>
+<div id="print-header">
+  <div class="print-logo-text">CAPE TOWN CHRISTIAN TABERNACLE</div>
+  <h2 id="print-song-title-hdr"></h2>
+  <p id="print-song-key-hdr"></p>
+</div>
 
 <!-- SCROLL TO TOP -->
 <button id="scroll-top-btn" onclick="scrollToTop()" style="
@@ -981,9 +1078,19 @@ function renderSetlist(){
   if(setlist.length===0){c.innerHTML='';e.style.display='block';return;}
   e.style.display='none';
   c.innerHTML=setlist.map(function(item,i){
-    return '<div class="setlist-item"><span class="sl-drag">⇅</span><span class="sl-num">'+(i+1)+'</span>'+
-      '<div class="sl-info"><div class="sl-title">'+esc(item.title)+'</div>'+(item.key?'<div class="sl-key">Key: '+esc(item.key)+'</div>':'')+'</div>'+
-      '<button class="sl-remove" onclick="removeFromSetlist('+i+')">✕</button></div>';
+    var hasNote=item.note&&item.note.trim();
+    return '<div class="setlist-item">'+
+      '<span class="sl-drag">⇅</span>'+
+      '<span class="sl-num">'+(i+1)+'</span>'+
+      '<div class="sl-info"><div class="sl-title">'+esc(item.title)+'</div>'+(item.key?'<div class="sl-key">Key: '+esc(item.key)+'</div>':'')+
+      (hasNote?'<div style="font-size:10px;color:var(--text3);font-family:-apple-system,sans-serif;margin-top:2px;font-style:italic">📝 '+esc(item.note.substring(0,60))+(item.note.length>60?'…':'')+'</div>':'')+
+      '</div>'+
+      '<button class="sl-note-btn'+(hasNote?' has-note':'')+'" onclick="toggleSlNote('+i+')" title="Add note">📝</button>'+
+      '<button class="sl-remove" onclick="removeFromSetlist('+i+')">✕</button>'+
+      '</div>'+
+      '<div class="sl-note-expand" id="sl-note-'+i+'">'+ 
+      '<textarea class="sl-note-textarea" placeholder="Song notes: capo, tempo, skip verse, special instructions..." onblur="saveSlNote('+i+',this.value)">'+esc(item.note||'')+'</textarea>'+
+      '</div>';
   }).join('');
 }
 function copySetlistText(){
@@ -1218,6 +1325,241 @@ document.addEventListener('keydown',function(e){
 var txStart=0;
 document.getElementById('presentation-overlay').addEventListener('touchstart',function(e){txStart=e.touches[0].clientX;},{passive:true});
 document.getElementById('presentation-overlay').addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-txStart;if(Math.abs(dx)>50)presNav(dx<0?1:-1);},{passive:true});
+
+
+// ═══════════════════════════════════════════════
+// FAVOURITES & RECENT
+// ═══════════════════════════════════════════════
+var favourites = JSON.parse(localStorage.getItem('ctct-favourites') || '[]');
+var recentViewed = JSON.parse(localStorage.getItem('ctct-recent') || '[]');
+
+function saveFavourites(){localStorage.setItem('ctct-favourites',JSON.stringify(favourites));}
+function saveRecent(){localStorage.setItem('ctct-recent',JSON.stringify(recentViewed));}
+
+function isFavourite(title){return favourites.indexOf(title)!==-1;}
+
+function toggleFavourite(){
+  if(!currentSong)return;
+  var t=currentSong.title;
+  var idx=favourites.indexOf(t);
+  if(idx===-1){favourites.push(t);showToast('⭐ Added to Favourites');}
+  else{favourites.splice(idx,1);showToast('Removed from Favourites');}
+  saveFavourites();updateStarBtn();
+}
+
+function updateStarBtn(){
+  var btn=document.getElementById('star-btn');
+  if(!btn||!currentSong)return;
+  var fav=isFavourite(currentSong.title);
+  btn.textContent=fav?'★':'☆';
+  btn.classList.toggle('starred',fav);
+  btn.title=fav?'Remove from Favourites':'Add to Favourites';
+}
+
+function trackRecent(title){
+  recentViewed=recentViewed.filter(function(t){return t!==title;});
+  recentViewed.unshift(title);
+  if(recentViewed.length>12)recentViewed=recentViewed.slice(0,12);
+  saveRecent();renderRecentChips();
+}
+
+function renderRecentChips(){
+  var sec=document.getElementById('recent-section');
+  var chips=document.getElementById('recent-chips');
+  if(!sec||!chips)return;
+  if(recentViewed.length===0){sec.style.display='none';return;}
+  sec.style.display='block';
+  chips.innerHTML=recentViewed.map(function(title){
+    var fav=isFavourite(title);
+    return '<div class="recent-chip" onclick="openSongByTitle(\''+title.replace(/'/g,"\\'")+'\')">'+
+      (fav?'⭐ ':'')+esc(title.length>22?title.substring(0,22)+'…':title)+'</div>';
+  }).join('');
+}
+
+function openSongByTitle(title){
+  var idx=filtered.findIndex(function(s){return s.title===title;});
+  if(idx!==-1){openSong(idx);}
+  else{
+    // Search for it in all songs
+    var si=SONGS.findIndex(function(s){return s.title===title;});
+    if(si!==-1){
+      // Temporarily set filtered to all songs and open
+      var prevFilter=filtered;
+      filtered=SONGS;
+      var ni=filtered.findIndex(function(s){return s.title===title;});
+      if(ni!==-1)openSong(ni);
+      filtered=prevFilter;
+    }
+  }
+}
+
+// Patch applyFilter to support favourites
+var _origApplyFilter=applyFilter;
+applyFilter=function(){
+  var q=document.getElementById('search').value.trim().toLowerCase();
+  filtered=SONGS.filter(function(s){
+    var ms=!q||s.title.toLowerCase().includes(q)||(s.key&&s.key.toLowerCase().includes(q))||(s.list&&s.list.toLowerCase().includes(q));
+    var mf=true;
+    if(currentFilter==='praise')mf=s.list&&s.list.includes('praise');
+    else if(currentFilter==='worship')mf=s.list&&s.list.includes('worship');
+    else if(currentFilter==='prayer')mf=s.list&&s.list.includes('prayer');
+    else if(currentFilter==='hymns')mf=s.source==='ctct-songbook';
+    else if(currentFilter==='has-lyrics')mf=s.sections&&s.sections.length>0;
+    else if(currentFilter==='has-chords')mf=s.sections&&s.sections.some(function(sec){return sec.text&&sec.text.includes('[');});
+    else if(currentFilter==='favourites')mf=isFavourite(s.title);
+    return ms&&mf;
+  });
+  render();
+};
+
+// ═══════════════════════════════════════════════
+// SETLIST SONG NOTES
+// ═══════════════════════════════════════════════
+function toggleSlNote(idx){
+  var el=document.getElementById('sl-note-'+idx);
+  if(!el)return;
+  var open=el.classList.toggle('open');
+  if(open){var ta=el.querySelector('textarea');if(ta)setTimeout(function(){ta.focus();},50);}
+}
+
+function saveSlNote(idx,val){
+  if(!setlist[idx])return;
+  setlist[idx].note=val.trim();
+  saveSetlist();
+  // Update note button color without full re-render
+  var items=document.querySelectorAll('.sl-note-btn');
+  if(items[idx])items[idx].classList.toggle('has-note',!!val.trim());
+}
+
+// ═══════════════════════════════════════════════
+// DARK / LIGHT MODE TOGGLE
+// ═══════════════════════════════════════════════
+var isDark=localStorage.getItem('ctct-theme')!=='light';
+(function applyTheme(){
+  document.body.classList.toggle('light',!isDark);
+  var btn=document.getElementById('theme-toggle');
+  if(btn)btn.textContent=isDark?'☀️':'🌙';
+})();
+
+function toggleTheme(){
+  isDark=!isDark;
+  document.body.classList.toggle('light',!isDark);
+  localStorage.setItem('ctct-theme',isDark?'dark':'light');
+  var btn=document.getElementById('theme-toggle');
+  if(btn)btn.textContent=isDark?'☀️':'🌙';
+  showToast(isDark?'Dark mode on':'Light mode on');
+}
+
+// ═══════════════════════════════════════════════
+// REHEARSAL MODE
+// ═══════════════════════════════════════════════
+var rehearsalActive=false;
+var rehearsalCount=0;
+var rehearsalSection='';
+
+function toggleRehearsal(){
+  rehearsalActive=!rehearsalActive;
+  rehearsalCount=0;
+  var bar=document.getElementById('rehearsal-bar');
+  var btn=document.getElementById('reh-toggle');
+  if(bar)bar.classList.toggle('active',rehearsalActive);
+  if(btn)btn.classList.toggle('active',rehearsalActive);
+  if(btn)btn.textContent=rehearsalActive?'✕ Stop Rehearsal':'🔁 Rehearse';
+  document.getElementById('reh-count').textContent='0';
+  document.getElementById('reh-section-name').textContent=rehearsalActive?'Tap a section below to focus':'—';
+  // Un-highlight all sections
+  document.querySelectorAll('.section-block').forEach(function(b){b.classList.remove('rehearsing');});
+  showToast(rehearsalActive?'Rehearsal mode ON — tap a section':'Rehearsal mode off');
+}
+
+function rehTick(){
+  rehearsalCount++;
+  document.getElementById('reh-count').textContent=rehearsalCount;
+  if(rehearsalCount%4===0)showToast(rehearsalCount+' times — great work! 🎵');
+}
+
+function rehReset(){
+  rehearsalCount=0;
+  document.getElementById('reh-count').textContent='0';
+}
+
+function selectRehearsalSection(label){
+  if(!rehearsalActive)return;
+  rehearsalSection=label;
+  rehearsalCount=0;
+  document.getElementById('reh-count').textContent='0';
+  document.getElementById('reh-section-name').textContent=label;
+  document.querySelectorAll('.section-block').forEach(function(b){
+    var lbl=b.querySelector('.section-label');
+    b.classList.toggle('rehearsing',lbl&&lbl.textContent===label);
+  });
+}
+
+// ═══════════════════════════════════════════════
+// PATCH renderLyrics TO ADD REHEARSAL CLICK + PRINT
+// ═══════════════════════════════════════════════
+var _origRenderLyrics=renderLyrics;
+renderLyrics=function(){
+  _origRenderLyrics();
+  // Add click handlers for rehearsal + print header
+  if(currentSong){
+    document.querySelectorAll('.section-block').forEach(function(b){
+      var lbl=b.querySelector('.section-label');
+      if(!lbl)return;
+      b.onclick=function(){
+        if(rehearsalActive){selectRehearsalSection(lbl.textContent);}
+      };
+    });
+    // Update print header
+    var ph=document.getElementById('print-song-title-hdr');
+    var pk=document.getElementById('print-song-key-hdr');
+    if(ph)ph.textContent=currentSong.title;
+    if(pk)pk.textContent=currentSong.key?('Key of '+transposeKey(currentSong.key,transposeSteps)):'';
+  }
+};
+
+// ═══════════════════════════════════════════════
+// PATCH openSong FOR RECENT + STAR + REHEARSAL RESET
+// ═══════════════════════════════════════════════
+var _baseOpenSong=openSong;
+openSong=function(idx){
+  _baseOpenSong(idx);
+  if(currentSong){
+    trackRecent(currentSong.title);
+    updateStarBtn();
+  }
+  // Reset rehearsal state on new song
+  rehearsalActive=false;rehearsalCount=0;
+  var bar=document.getElementById('rehearsal-bar');
+  var btn=document.getElementById('reh-toggle');
+  if(bar)bar.classList.remove('active');
+  if(btn){btn.classList.remove('active');btn.textContent='🔁 Rehearse';}
+};
+
+// ═══════════════════════════════════════════════
+// PDF / PRINT EXPORT
+// ═══════════════════════════════════════════════
+function exportPDF(){
+  // For song view - print the song with lyrics
+  var songView=document.getElementById('song-view');
+  if(songView&&songView.style.display==='block'){
+    window.print();
+    return;
+  }
+  // For setlist view - print the setlist
+  // Temporarily show any open notes
+  document.querySelectorAll('.sl-note-expand').forEach(function(el){el.classList.add('open');});
+  window.print();
+  setTimeout(function(){
+    document.querySelectorAll('.sl-note-expand').forEach(function(el){el.classList.remove('open');});
+  },1000);
+}
+
+// Also patch print button in song view action row to use export
+document.addEventListener('DOMContentLoaded',function(){
+  renderRecentChips();
+});
+setTimeout(renderRecentChips,500);
 
 // ═══════════════════════════════════════════════
 // SERVICE WORKER
