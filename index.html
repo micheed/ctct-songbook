@@ -314,7 +314,7 @@ textarea.field-input{min-height:110px;resize:vertical;line-height:1.6}
   <div id="song-list"></div>
   <div id="empty-state"><div class="icon">🎵</div><p>No songs found</p></div>
   <div id="copyright-footer">
-    © 2026 Michee Diankeba · CTCT Choir Songbook<br>
+    © 2024 Michee Diankeba · CTCT Choir Songbook<br>
     Cape Town Christian Tabernacle · All rights reserved<br>
     Compiled &amp; curated by Michee Diankeba
   </div>
@@ -362,7 +362,7 @@ textarea.field-input{min-height:110px;resize:vertical;line-height:1.6}
       <div class="pin-key" onclick="pinClear()" style="font-size:var(--fs-md)">⌫</div><div class="pin-key" onclick="pinPress('0')">0</div><div class="pin-key" onclick="pinSubmit()" style="background:var(--blue);border-color:var(--blue);color:#fff;font-size:var(--fs-sm)">OK</div>
     </div>
     <div id="pin-error"></div>
-    <div id="pin-hint">Default PIN: 2024</div>
+    <div id="pin-hint">Default PIN: 2024 · Michee default password: admin2024</div>
   </div>
   <!-- ADMIN CONTENT (shown after PIN) -->
   <div id="admin-content" style="display:none">
@@ -454,8 +454,12 @@ textarea.field-input{min-height:110px;resize:vertical;line-height:1.6}
           <option value="member" selected>Band Member</option>
           <option value="viewer">Viewer (read-only)</option>
         </select>
-        <button id="add-user-btn" onclick="addUser()">Add</button>
       </div>
+      <div class="user-form-row" style="align-items:center">
+        <input type="password" id="new-user-pass" class="field-input" placeholder="Password (optional – leave blank for open access)" style="flex:1" autocomplete="new-password">
+      </div>
+      <p style="font-size:10px;color:var(--text3);font-family:-apple-system,sans-serif;margin-bottom:10px">Admin &amp; Worship Leader roles should always have a password. Members/Viewers can be open.</p>
+      <button id="add-user-btn" onclick="addUser()">Add Member</button>
     </div>
     <!-- USER LIST -->
     <div id="users-list"></div>
@@ -487,7 +491,7 @@ textarea.field-input{min-height:110px;resize:vertical;line-height:1.6}
       </table>
     </div>
     <div id="copyright-footer2" style="text-align:center;padding:20px 16px;font-size:10px;color:var(--text3);font-family:-apple-system,sans-serif;border-top:1px solid var(--border);line-height:1.7">
-      © 2026 Michee Diankeba · CTCT Choir Songbook<br>
+      © 2024 Michee Diankeba · CTCT Choir Songbook<br>
       All rights reserved · Cape Town Christian Tabernacle
     </div>
   </div>
@@ -527,7 +531,7 @@ textarea.field-input{min-height:110px;resize:vertical;line-height:1.6}
   </div>
   <div id="lyrics-content"></div>
   <div style="text-align:center;padding:16px;font-size:10px;color:var(--text3);font-family:-apple-system,sans-serif">
-    © 2026 Michee Diankeba · CTCT Choir Songbook
+    © 2024 Michee Diankeba · CTCT Choir Songbook
   </div>
 </div>
 
@@ -546,7 +550,7 @@ textarea.field-input{min-height:110px;resize:vertical;line-height:1.6}
   <div id="pres-ndi-badge">💡 Tip: Capture this window in OBS → NDI Output for church displays</div>
   <div id="pres-section-label"></div>
   <div id="pres-lyrics"><div id="pres-text"></div></div>
-  <div id="pres-copyright">© 2026 Michee Diankeba · CTCT Choir Songbook · Cape Town Christian Tabernacle</div>
+  <div id="pres-copyright">© 2024 Michee Diankeba · CTCT Choir Songbook · Cape Town Christian Tabernacle</div>
   <div id="pres-nav">
     <button class="pres-btn" onclick="presNav(-1)">‹</button>
     <span id="pres-counter"></span>
@@ -562,18 +566,34 @@ textarea.field-input{min-height:110px;resize:vertical;line-height:1.6}
 
 <div id="toast"></div>
 
+<!-- SCROLL TO TOP -->
+<button id="scroll-top-btn" onclick="scrollToTop()" style="
+  display:none;position:fixed;bottom:80px;right:16px;z-index:100;
+  width:44px;height:44px;border-radius:50%;
+  background:var(--blue2);border:none;color:#fff;font-size:20px;
+  cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.4);
+  display:none;align-items:center;justify-content:center;
+  transition:all .3s;font-family:-apple-system,sans-serif;
+" aria-label="Scroll to top">↑</button>
+
+<!-- ALPHA JUMP BAR -->
+<div id="alpha-bar" style="
+  display:none;position:fixed;right:4px;top:50%;transform:translateY(-50%);
+  z-index:99;display:flex;flex-direction:column;gap:1px;
+"></div>
+
 <script>
 // ═══════════════════════════════════════════════
 // CONSTANTS & STATE
 // ═══════════════════════════════════════════════
-var COPYRIGHT = '© 2026 Michee Diankeba · CTCT Choir Songbook';
+var COPYRIGHT = '© 2024 Michee Diankeba · CTCT Choir Songbook';
 var SONGS = [], filtered = [], currentFilter = 'all';
 var fontSize = 17, presFontSize = 32;
 var currentSong = null, transposeSteps = 0, viewMode = 'lyrics';
 var presSlides = [], presIndex = 0;
 
 // Security / Users
-var DEFAULT_PIN = '2026';
+var DEFAULT_PIN = '2024';
 var adminPin = localStorage.getItem('ctct-admin-pin') || DEFAULT_PIN;
 var pinBuffer = '', pin2Buffer = '';
 var adminUnlocked = false, usersUnlocked = false;
@@ -596,8 +616,11 @@ var PERMS = [
   {label:'Manage users &amp; PINs', roles:['admin']},
 ];
 
+// Simple hash (djb2) - not cryptographic but prevents casual snooping
+function hashStr(s){var h=5381;for(var i=0;i<s.length;i++)h=((h<<5)+h)^s.charCodeAt(i);return(h>>>0).toString(36);}
+
 var defaultUsers = [
-  {name:'Michee Diankeba', instrument:'Choir Director / Admin', role:'admin', id:'u1'},
+  {name:'Michee Diankeba', instrument:'Choir Director / Admin', role:'admin', id:'u1', passHash:hashStr('admin2024'), hasPass:true},
 ];
 var users = JSON.parse(localStorage.getItem('ctct-users') || JSON.stringify(defaultUsers));
 
@@ -651,6 +674,7 @@ function processText(text,s){return text.replace(/\[([^\]]+)\]/g,function(_,c){r
     filtered=SONGS; render();
     document.getElementById('stats').textContent=SONGS.length+' songs';
     renderSetlist();
+    buildAlphaBar();
   });
   addSectionBlock('verse','Verse 1','');
 })();
@@ -672,18 +696,56 @@ function updateUserChip(){
 }
 
 function showUserMenu(){
-  var items='<p style="font-size:var(--fs-xs);color:var(--text3);font-family:-apple-system,sans-serif;margin-bottom:12px">Sign in as a band member to unlock your features</p>';
+  var items='<p style="font-size:var(--fs-xs);color:var(--text3);font-family:-apple-system,sans-serif;margin-bottom:12px">Select your profile to sign in</p>';
   users.forEach(function(u){
     var r=ROLES[u.role]||ROLES.viewer;
-    items+='<div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);cursor:pointer" onclick="signIn(\''+u.id+'\')">';
+    var lockIcon=u.hasPass?'<span style="font-size:10px;color:var(--text3);margin-left:4px">🔐</span>':'';
+    items+='<div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);cursor:pointer" onclick="requestSignIn(\''+u.id+'\')">';
     items+='<div class="user-avatar" style="background:'+r.color+';width:36px;height:36px;font-size:14px">'+u.name[0].toUpperCase()+'</div>';
-    items+='<div style="flex:1"><div style="font-size:var(--fs-sm);font-weight:600;color:var(--text);font-family:-apple-system,sans-serif">'+esc(u.name)+'</div>';
+    items+='<div style="flex:1"><div style="font-size:var(--fs-sm);font-weight:600;color:var(--text);font-family:-apple-system,sans-serif">'+esc(u.name)+lockIcon+'</div>';
     items+='<div style="font-size:10px;color:var(--text3);font-family:-apple-system,sans-serif">'+esc(u.instrument||u.role)+'</div></div>';
     items+='<span class="user-badge role-'+u.role+'">'+r.label+'</span></div>';
   });
-  if(currentUser) items+='<button onclick="signOut()" style="margin-top:12px;width:100%;padding:9px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--accent2);font-size:var(--fs-sm);cursor:pointer;font-family:-apple-system,sans-serif">Sign Out</button>';
-  showModal('👥 Who are you?', items, [], true);
+  if(currentUser)items+='<button onclick="signOut()" style="margin-top:12px;width:100%;padding:9px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--accent2);font-size:var(--fs-sm);cursor:pointer;font-family:-apple-system,sans-serif">Sign Out</button>';
+  showModal('👤 Sign In', items, [], true);
 }
+
+function requestSignIn(uid){
+  var u=users.find(function(x){return x.id===uid;});
+  if(!u)return;
+  if(u.hasPass){
+    // Show password prompt inside modal
+    closeModal();
+    setTimeout(function(){
+      var body='<p style="font-size:var(--fs-sm);color:var(--text3);font-family:-apple-system,sans-serif;margin-bottom:14px">'+
+        'Password required for <strong style="color:var(--text)">'+esc(u.name)+'</strong></p>'+
+        '<input type="password" id="user-pass-input" placeholder="Enter password" autocomplete="current-password" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:-apple-system,sans-serif;font-size:var(--fs-md);padding:11px 14px;outline:none;margin-bottom:8px" onkeydown="if(event.key===\'Enter\')confirmUserPass(\''+u.id+'\')">';
+      body+='<div id="pass-error" style="color:var(--accent2);font-size:var(--fs-xs);font-family:-apple-system,sans-serif;min-height:16px"></div>';
+      showModal('🔐 '+esc(u.name), body,
+        [{label:'Cancel',cls:'cancel',fn:'closeModal()'},
+         {label:'Sign In',cls:'confirm blue',fn:'confirmUserPass(\''+u.id+'\')'}], true);
+      setTimeout(function(){var el=document.getElementById('user-pass-input');if(el)el.focus();},100);
+    },50);
+  } else {
+    signIn(uid);
+  }
+}
+
+function confirmUserPass(uid){
+  var u=users.find(function(x){return x.id===uid;});
+  var input=document.getElementById('user-pass-input');
+  if(!u||!input)return;
+  var entered=hashStr(input.value);
+  if(entered===u.passHash){
+    signIn(uid);
+  } else {
+    var err=document.getElementById('pass-error');
+    if(err)err.textContent='Incorrect password. Try again.';
+    input.value='';input.focus();
+    setTimeout(function(){if(err)err.textContent='';},2500);
+  }
+}
+
 
 function signIn(uid){
   var u=users.find(function(x){return x.id===uid;});
@@ -1039,12 +1101,19 @@ function addUser(){
   var name=document.getElementById('new-user-name').value.trim();
   var instr=document.getElementById('new-user-instrument').value.trim();
   var role=document.getElementById('new-user-role').value;
+  var pass=document.getElementById('new-user-pass').value;
   if(!name){showToast('Enter a name');return;}
+  if((role==='admin'||role==='leader')&&!pass){showToast('Admin & Leaders must have a password');return;}
   var u={name:name,instrument:instr,role:role,id:'u'+Date.now()};
+  if(pass){u.passHash=hashStr(pass);u.hasPass=true;}
   users.push(u); saveUsers(); renderUsers();
-  document.getElementById('new-user-name').value='';document.getElementById('new-user-instrument').value='';
+  document.getElementById('new-user-name').value='';
+  document.getElementById('new-user-instrument').value='';
+  document.getElementById('new-user-pass').value='';
   showToast(name+' added!');
 }
+
+
 function removeUser(id){
   if(id==='u1'){showToast('Cannot remove the primary admin');return;}
   if(!confirm('Remove this user?'))return;
@@ -1055,18 +1124,48 @@ function renderUsers(){
   var c=document.getElementById('users-list');
   c.innerHTML=users.map(function(u){
     var r=ROLES[u.role]||ROLES.viewer;
+    var lockIcon=u.hasPass?'<span style="font-size:10px"> 🔐</span>':'<span style="font-size:10px;color:var(--text3)"> (no password)</span>';
     return '<div class="user-card">'+
       '<div class="user-avatar" style="background:'+r.color+'">'+u.name[0].toUpperCase()+'</div>'+
-      '<div class="user-info"><div class="user-name">'+esc(u.name)+'</div>'+
-      '<div class="user-role">'+esc(u.instrument||'–')+'</div></div>'+
+      '<div class="user-info">'+
+        '<div class="user-name">'+esc(u.name)+lockIcon+'</div>'+
+        '<div class="user-role">'+esc(u.instrument||'–')+'</div>'+
+      '</div>'+
       '<span class="user-badge role-'+u.role+'">'+r.label+'</span>'+
       '<div class="user-actions">'+
         '<select class="user-act-btn" onchange="changeRole(\''+u.id+'\',this.value)" style="padding:4px 6px;font-size:10px">'+
           Object.keys(ROLES).map(function(rk){return '<option value="'+rk+'"'+(u.role===rk?' selected':'')+'>'+ROLES[rk].label+'</option>';}).join('')+
         '</select>'+
+        '<button class="user-act-btn" onclick="changeUserPass(\''+u.id+'\')">🔑 Pass</button>'+
         (u.id!=='u1'?'<button class="user-act-btn danger" onclick="removeUser(\''+u.id+'\')">Remove</button>':'')+
       '</div></div>';
   }).join('');
+}
+
+function changeUserPass(uid){
+  var u=users.find(function(x){return x.id===uid;});
+  if(!u)return;
+  var body='<p style="font-size:var(--fs-sm);color:var(--text3);font-family:-apple-system,sans-serif;margin-bottom:14px">Set password for <strong style="color:var(--text)">'+esc(u.name)+'</strong></p>'+
+    '<input type="password" id="chpass-input" placeholder="New password" autocomplete="new-password" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:-apple-system,sans-serif;font-size:var(--fs-md);padding:11px 14px;outline:none;margin-bottom:8px">'+
+    '<input type="password" id="chpass-confirm" placeholder="Confirm password" autocomplete="new-password" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:-apple-system,sans-serif;font-size:var(--fs-md);padding:11px 14px;outline:none">'+
+    '<div id="chpass-err" style="color:var(--accent2);font-size:var(--fs-xs);font-family:-apple-system,sans-serif;min-height:18px;margin-top:6px"></div>'+
+    '<p style="font-size:10px;color:var(--text3);font-family:-apple-system,sans-serif;margin-top:8px">Leave blank and save to remove password (open access).</p>';
+  showModal('🔑 Set Password',body,
+    [{label:'Cancel',cls:'cancel',fn:'closeModal()'},
+     {label:'Save Password',cls:'confirm blue',fn:'saveUserPass(\''+uid+'\')'}],true);
+  setTimeout(function(){var el=document.getElementById('chpass-input');if(el)el.focus();},100);
+}
+
+function saveUserPass(uid){
+  var u=users.find(function(x){return x.id===uid;});
+  var p1=document.getElementById('chpass-input').value;
+  var p2=document.getElementById('chpass-confirm').value;
+  var err=document.getElementById('chpass-err');
+  if(p1&&p1!==p2){if(err)err.textContent='Passwords do not match';return;}
+  if(p1){u.passHash=hashStr(p1);u.hasPass=true;}
+  else{delete u.passHash;u.hasPass=false;}
+  saveUsers();renderUsers();closeModal();
+  showToast(p1?'Password set for '+u.name:'Password removed for '+u.name);
 }
 function renderPermissionsTable(){
   var t=document.getElementById('perms-table');if(!t)return;
@@ -1123,6 +1222,84 @@ document.getElementById('presentation-overlay').addEventListener('touchend',func
 // ═══════════════════════════════════════════════
 // SERVICE WORKER
 // ═══════════════════════════════════════════════
+// ── SCROLL TO TOP ──────────────────────────────────────
+var scrollTopBtn = document.getElementById('scroll-top-btn');
+var songListEl = document.querySelector('#songs-view');
+
+// Show/hide scroll-to-top based on scroll position of songs-view
+document.addEventListener('scroll', handleScroll, {passive:true});
+window.addEventListener('scroll', handleScroll, {passive:true});
+
+// Actually we need to watch the list view scroll — use a MutationObserver
+// and listen on window scroll (since songs-view is not fixed)
+function handleScroll(){
+  if(document.getElementById('song-view').style.display==='block') return;
+  var scrollY = window.scrollY || document.documentElement.scrollTop;
+  if(scrollTopBtn){
+    scrollTopBtn.style.display = scrollY > 300 ? 'flex' : 'none';
+  }
+}
+
+function scrollToTop(){
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// ── ALPHABETICAL JUMP BAR ──────────────────────────────
+function buildAlphaBar(){
+  var bar = document.getElementById('alpha-bar');
+  if(!bar) return;
+  // Get unique first letters from SONGS
+  var letters = {};
+  SONGS.forEach(function(s){ var l = s.title[0].toUpperCase(); if(/[A-Z0-9]/.test(l)) letters[l]=true; });
+  var sorted = Object.keys(letters).sort();
+  bar.innerHTML = sorted.map(function(l){
+    return '<div onclick="jumpToLetter(\''+l+'\')" style="'+
+      'width:18px;height:18px;display:flex;align-items:center;justify-content:center;'+
+      'font-size:9px;font-weight:700;color:var(--blue3);cursor:pointer;'+
+      'font-family:-apple-system,sans-serif;border-radius:3px;'+
+      'transition:background .15s;-webkit-tap-highlight-color:transparent'+
+      '" onmouseenter="this.style.background=\'var(--surface2)\'" onmouseleave="this.style.background=\'transparent\'">'+l+'</div>';
+  }).join('');
+  bar.style.display = 'flex';
+}
+
+function jumpToLetter(letter){
+  // Find first song item starting with this letter
+  var items = document.querySelectorAll('.song-item');
+  var songs = document.querySelectorAll('.song-title');
+  for(var i=0; i<songs.length; i++){
+    if(songs[i].textContent.trim()[0].toUpperCase() === letter){
+      items[i].scrollIntoView({behavior:'smooth', block:'start'});
+      // Flash highlight
+      items[i].style.background = 'rgba(30,136,229,.15)';
+      setTimeout(function(el){ return function(){ el.style.background=''; }; }(items[i]), 600);
+      return;
+    }
+  }
+  showToast('No songs starting with '+letter);
+}
+
+// ── SHOW ALPHA BAR ONLY ON SONGS VIEW ─────────────────
+function updateAlphaBarVisibility(){
+  var bar = document.getElementById('alpha-bar');
+  var songView = document.getElementById('song-view');
+  if(!bar) return;
+  if(songView && songView.style.display === 'block'){
+    bar.style.display='none';
+  } else {
+    var activeTab = document.querySelector('.nav-tab.active');
+    bar.style.display = (activeTab && activeTab.dataset.tab === 'songs-view') ? 'flex' : 'none';
+  }
+}
+
+// Patch openSong and closeSong to show/hide bar
+var _origOpen = openSong;
+openSong = function(idx){ _origOpen(idx); updateAlphaBarVisibility(); handleScroll(); };
+var _origClose = closeSong;
+closeSong = function(){ _origClose(); updateAlphaBarVisibility(); handleScroll(); };
+var _origSwitch = switchTab;
+switchTab = function(id){ _origSwitch(id); updateAlphaBarVisibility(); };
+
 if('serviceWorker'in navigator){navigator.serviceWorker.register('/ctct-songbook/sw.js',{scope:'/ctct-songbook/'}).catch(function(){});}
 </script>
 </body>
