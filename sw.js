@@ -1,10 +1,5 @@
-var CACHE = 'ctct-songbook-v8';
-var FILES = [
-  '/ctct-songbook/',
-  '/ctct-songbook/index.html',
-  '/ctct-songbook/songs_final.json',
-  '/ctct-songbook/manifest.json'
-];
+var CACHE = 'ctct-songbook-v9';
+var FILES = ['/', '/index.html', '/songs_final.json', '/manifest.json'];
 self.addEventListener('install', function(e) {
   e.waitUntil(caches.open(CACHE).then(function(c) { return c.addAll(FILES); }));
   self.skipWaiting();
@@ -16,11 +11,17 @@ self.addEventListener('activate', function(e) {
   self.clients.claim();
 });
 self.addEventListener('fetch', function(e) {
+  if(e.request.url.includes('/slide')||e.request.url.includes('/events')||
+     e.request.url.includes('/status')||e.request.url.includes('/auth-control')||
+     e.request.url.includes('/current')){
+    e.respondWith(fetch(e.request));
+    return;
+  }
   e.respondWith(caches.match(e.request).then(function(r) {
     return r || fetch(e.request).then(function(res) {
       var clone = res.clone();
       caches.open(CACHE).then(function(c){ c.put(e.request, clone); });
       return res;
     });
-  }).catch(function() { return caches.match('/ctct-songbook/index.html'); }));
+  }).catch(function() { return caches.match('/index.html'); }));
 });

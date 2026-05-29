@@ -382,6 +382,8 @@ body.light .song-key{color:#fff}
       <button class="filter-btn" data-filter="prayer">🙏 Prayer</button>
       <button class="filter-btn" data-filter="has-chords">🎸 Chords</button>
       <button class="filter-btn" data-filter="favourites">⭐ Favourites</button>
+      <button class="filter-btn" data-filter="english">English</button>
+      <button class="filter-btn" data-filter="french">Français</button>
       <button class="filter-btn" data-filter="has-lyrics">With Lyrics</button>
     </div>
   </div>
@@ -769,7 +771,9 @@ function processText(text,s){return text.replace(/\[([^\]]+)\]/g,function(_,c){r
     var local=JSON.parse(localStorage.getItem('ctct-local-songs')||'[]');
     SONGS=data.concat(local).sort(function(a,b){return a.title.localeCompare(b.title);});
     filtered=SONGS; render();
-    document.getElementById('stats').textContent=SONGS.length+' songs';
+    var cpt=SONGS.filter(function(s){return s.source==='cpt';}).length;
+    var cdc=SONGS.filter(function(s){return s.source==='cdc';}).length;
+    document.getElementById('stats').textContent=SONGS.length+' songs  ·  '+cpt+' English · '+cdc+' Français/Multilingue';
     renderSetlist();
     buildAlphaBar();
   });
@@ -982,6 +986,8 @@ function applyFilter(){
     else if(currentFilter==='hymns')mf=s.source==='ctct-songbook';
     else if(currentFilter==='has-lyrics')mf=s.sections&&s.sections.length>0;
     else if(currentFilter==='has-chords')mf=s.sections&&s.sections.some(function(sec){return sec.text&&sec.text.includes('[');});
+    else if(currentFilter==='english')mf=s.source==='cpt';
+    else if(currentFilter==='french')mf=s.source==='cdc';
     return ms&&mf;
   });
   render();
@@ -1406,6 +1412,8 @@ applyFilter=function(){
     else if(currentFilter==='hymns')mf=s.source==='ctct-songbook';
     else if(currentFilter==='has-lyrics')mf=s.sections&&s.sections.length>0;
     else if(currentFilter==='has-chords')mf=s.sections&&s.sections.some(function(sec){return sec.text&&sec.text.includes('[');});
+    else if(currentFilter==='english')mf=s.source==='cpt';
+    else if(currentFilter==='french')mf=s.source==='cdc';
     else if(currentFilter==='favourites')mf=isFavourite(s.title);
     return ms&&mf;
   });
