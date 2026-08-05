@@ -1,5 +1,11 @@
-var CACHE = 'ctct-songbook-v9';
-var FILES = ['/', '/index.html', '/songs_final.json', '/manifest.json'];
+var CACHE = 'ctct-songbook-v10';
+// BASE is wherever this service worker is actually registered from - works
+// identically whether the app is served at the domain root (local network
+// server) or under a subfolder (e.g. GitHub Pages project sites), with no
+// hardcoded folder name.
+var BASE = self.registration.scope;
+var FILES = [BASE, BASE + 'index.html', BASE + 'songs_final.json', BASE + 'manifest.json'];
+
 self.addEventListener('install', function(e) {
   e.waitUntil(caches.open(CACHE).then(function(c) { return c.addAll(FILES); }));
   self.skipWaiting();
@@ -23,5 +29,5 @@ self.addEventListener('fetch', function(e) {
       caches.open(CACHE).then(function(c){ c.put(e.request, clone); });
       return res;
     });
-  }).catch(function() { return caches.match('/index.html'); }));
+  }).catch(function() { return caches.match(BASE + 'index.html'); }));
 });
