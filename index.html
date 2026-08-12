@@ -272,7 +272,7 @@ textarea.field-input{min-height:110px;resize:vertical;line-height:1.6}
 .modal-btn.confirm{background:var(--red);color:#fff;font-weight:600}
 .modal-btn.confirm.blue{background:var(--blue2)}
 
-@media print{#nav-tabs,#songs-header,#song-hdr,.no-print{display:none!important}#setlist-view{display:block!important}body{background:#fff;color:#000}.sl-remove,.sl-drag{display:none}.sl-title{color:#000}.sl-key{color:#1565c0}}
+@media print{#nav-tabs,#songs-header,#song-hdr,.no-print{display:none!important}body{background:#fff;color:#000}.sl-remove,.sl-drag{display:none}.sl-title{color:#000}.sl-key{color:#1565c0}}
 
 /* ── FAVOURITES / RECENT ── */
 .star-btn{background:none;border:none;font-size:18px;cursor:pointer;padding:4px;flex-shrink:0;transition:transform .2s;line-height:1}
@@ -336,7 +336,6 @@ body.light .song-key{color:#fff}
  .section-text{color:#000!important;line-height:1.6!important}
  .chord-span{color:#1565c0!important;background:transparent!important}
  .section-block{break-inside:avoid;page-break-inside:avoid;cursor:default!important}
- #setlist-view{display:block!important}
  .sl-remove,.sl-drag,.sl-note-btn{display:none!important}
  .sl-title{color:#000!important}.sl-key{color:#1565c0!important}
  .sl-note-expand{display:block!important}
@@ -447,6 +446,61 @@ details summary:hover{color:var(--text2)}
 #pres-header{box-shadow:0 2px 12px rgba(0,0,0,.4)}
 .pres-btn{transition:transform .16s var(--ease),background .16s var(--ease),border-color .16s var(--ease)}
 .pres-btn:active{transform:scale(.94)}
+
+/* ═══════════════════════════════════════════════
+   PROGRAM BUILDER — list mode, edit mode, and print/PDF
+   ═══════════════════════════════════════════════ */
+#program-list-actions{padding:14px 16px;border-bottom:1px solid var(--border)}
+#new-service-btn{background:var(--blue2);color:#fff;box-shadow:var(--shadow-glow-blue);transition:transform .14s var(--ease)}
+#new-service-btn:active{transform:translateY(1px)}
+#program-months{padding:4px 0 24px}
+.program-month-group{margin-bottom:4px}
+.program-month-header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:18px 16px 10px}
+.program-month-header span{font-family:'Playfair Display',serif;font-size:var(--fs-lg);color:var(--text2);letter-spacing:.01em}
+.program-month-export{background:none;border:1px solid var(--border);color:var(--text3);font-size:var(--fs-xs);padding:6px 12px;border-radius:8px;cursor:pointer;font-family:-apple-system,sans-serif;white-space:nowrap;transition:border-color .16s var(--ease),color .16s var(--ease)}
+.program-month-export:hover{border-color:var(--blue2);color:var(--blue2)}
+
+.program-card{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 12px 8px;padding:13px 14px;background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow-sm);cursor:pointer;transition:transform .16s var(--ease),box-shadow .16s var(--ease),border-color .16s var(--ease)}
+.program-card:hover{border-color:var(--surface3);box-shadow:var(--shadow-md);transform:translateY(-1px)}
+.program-card:active{transform:translateY(0)}
+.program-card-main{min-width:0;flex:1}
+.program-card-date{font-size:var(--fs-xs);color:var(--blue2);font-family:-apple-system,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+.program-card-title{font-family:'Playfair Display',serif;font-size:var(--fs-md);color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.program-card-count{font-size:var(--fs-xs);color:var(--text3);font-family:-apple-system,sans-serif;margin-top:3px}
+.program-card-actions{display:flex;gap:6px;flex-shrink:0}
+.program-card-actions button{width:30px;height:30px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text3);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:border-color .16s var(--ease),color .16s var(--ease)}
+.program-card-actions button:first-child:hover{border-color:var(--blue2);color:var(--blue2)}
+.program-card-actions button:last-child:hover{border-color:var(--red);color:var(--red)}
+
+#program-edit-mode{padding-bottom:16px}
+#program-edit-mode .view-header{position:relative}
+#program-back-btn{background:none;border:none;color:var(--blue2);font-size:var(--fs-sm);cursor:pointer;font-family:-apple-system,sans-serif;padding:0 0 10px;display:block;transition:opacity .15s}
+#program-back-btn:hover{opacity:.7}
+#setlist-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.sl-field{background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:-apple-system,sans-serif;font-size:var(--fs-sm);padding:8px 10px;outline:none;transition:border-color .16s var(--ease)}
+.sl-field:focus{border-color:var(--blue2)}
+
+/* Print — hidden on screen, shown only during window.print() via body.printing-month */
+#print-month{display:none}
+@media print{
+  body.printing-month #setlist-view,body.printing-month #song-view,
+  body.printing-month #print-header,body.printing-month #nav-tabs{display:none!important}
+  body.printing-month #print-month{display:block!important}
+  body.printing-month{background:#fff!important}
+  .print-service-page{padding:24pt 20pt}
+  .print-service-page{page-break-after:always}
+  .print-service-page:last-child{page-break-after:auto}
+  .print-header-block{text-align:center;padding-bottom:14pt;border-bottom:2pt solid #1a2f6b;margin-bottom:16pt}
+  .print-header-block .print-logo-text{font-size:13pt;font-weight:bold;letter-spacing:.08em;color:#1a2f6b;font-family:-apple-system,sans-serif}
+  .print-header-block h2{font-family:Georgia,serif;font-size:20pt;color:#000;margin:8pt 0 2pt}
+  .print-header-block p{font-size:11pt;color:#555;font-family:-apple-system,sans-serif}
+  .print-sl-list{margin-top:10pt}
+  .print-sl-row{font-size:13pt;padding:7pt 0;border-bottom:.5pt solid #ddd;color:#000;font-family:Georgia,serif}
+  .print-sl-key{color:#1565c0;font-weight:600;font-size:11pt}
+  .print-sl-note{font-size:10pt;color:#666;font-style:italic;margin-top:2pt;padding-left:16pt;font-family:-apple-system,sans-serif}
+  .print-notes{margin-top:22pt;padding-top:12pt;border-top:1pt solid #ccc;font-size:11pt;color:#333;line-height:1.6;font-family:-apple-system,sans-serif}
+  .print-notes strong{display:block;margin-bottom:4pt;text-transform:uppercase;letter-spacing:.05em;font-size:9pt;color:#888}
+}
 </style>
 </head>
 <body>
@@ -454,7 +508,7 @@ details summary:hover{color:var(--text2)}
 <!-- NAV -->
 <div id="nav-tabs">
  <div class="nav-tab active" data-tab="songs-view" onclick="switchTab('songs-view')"><span class="ti">🎵</span>Songs</div>
- <div class="nav-tab" data-tab="setlist-view" onclick="switchTab('setlist-view')"><span class="ti">📋</span>Setlist</div>
+ <div class="nav-tab" data-tab="setlist-view" onclick="switchTab('setlist-view')"><span class="ti">📋</span>Program</div>
  <div class="nav-tab" id="admin-tab" data-tab="admin-view" onclick="requirePin('admin-view')"><span class="ti">✏️</span>Edit</div>
  <div class="nav-tab" id="users-tab" data-tab="users-view" onclick="requirePin('users-view')"><span class="ti">👥</span>Users</div>
 </div>
@@ -510,28 +564,47 @@ details summary:hover{color:var(--text2)}
 
 <!-- ══ SETLIST VIEW ══ -->
 <div id="setlist-view" class="view">
+
+ <div id="program-list-mode">
  <div class="view-header">
+ <h2>🎶 Monthly Program</h2>
+ <p>Plan songs for each service, month by month</p>
+ </div>
+ <div id="program-list-actions">
+ <button class="sl-action-btn" id="new-service-btn" onclick="createNewProgram()">+ New Service</button>
+ </div>
+ <div id="program-empty" style="display:none"><div style="font-size:40px;text-align:center;padding:60px 24px;color:var(--text3)">🗓️<br><br><span style="font-size:var(--fs-md)">No services yet.<br><small>Tap "+ New Service" to plan your first one</small></span></div></div>
+ <div id="program-months"></div>
+ </div>
+
+ <div id="program-edit-mode" style="display:none">
+ <div class="view-header">
+ <button id="program-back-btn" class="no-print" onclick="showProgramList()">‹ All Services</button>
  <h2>🎶 Band Program</h2>
- <p>Build today's setlist &amp; share with the band</p>
+ <p>Build this service's setlist &amp; share with the band</p>
  <div id="setlist-meta">
- <input type="date" id="setlist-date" class="sl-field">
- <input type="text" id="setlist-title-input" class="sl-field" placeholder="Service title / theme..." style="flex:1;min-width:130px">
- <button style="font-size:var(--fs-xs);color:var(--accent2);background:none;border:1px solid var(--border);border-radius:6px;padding:6px 10px;cursor:pointer;font-family:-apple-system,sans-serif" onclick="clearSetlist()">Clear</button>
+ <input type="date" id="setlist-date" class="sl-field" oninput="saveSetlist()">
+ <input type="text" id="setlist-title-input" class="sl-field" placeholder="Service title / theme..." style="flex:1;min-width:130px" oninput="saveSetlist()">
+ <button style="font-size:var(--fs-xs);color:var(--accent2);background:none;border:1px solid var(--border);border-radius:6px;padding:6px 10px;cursor:pointer;font-family:-apple-system,sans-serif" onclick="deleteCurrentProgram()">Delete</button>
  </div>
  </div>
  <div class="sl-notes-wrap">
  <div class="sl-notes-label">Band Notes / Instructions</div>
- <textarea id="band-notes" placeholder="e.g. Start softly, capo 2 for guitars, tempo changes, leader notes..."></textarea>
+ <textarea id="band-notes" placeholder="e.g. Start softly, capo 2 for guitars, tempo changes, leader notes..." oninput="saveSetlist()"></textarea>
  </div>
- <div id="setlist-empty" style="display:none"><div style="font-size:40px;text-align:center;padding:60px 24px;color:var(--text3)">📋<br><br><span style="font-size:var(--fs-md)">No songs yet.<br><small>Open any song → Add to Setlist</small></span></div></div>
+ <div id="setlist-empty" style="display:none"><div style="font-size:40px;text-align:center;padding:60px 24px;color:var(--text3)">📋<br><br><span style="font-size:var(--fs-md)">No songs yet.<br><small>Open any song → Add to Program</small></span></div></div>
  <div id="setlist-list"></div>
  <div id="setlist-actions">
  <button class="sl-action-btn" id="start-setlist-btn" onclick="startSetlistPresentation()">▶ Present All</button>
- <button class="sl-action-btn" id="print-setlist-btn" onclick="window.print()">🖨 Print</button>
- <button class="sl-action-btn" id="share-setlist-btn" onclick="copySetlistText()">📋 Copy Text</button>
- <button class="sl-action-btn" onclick="exportPDF()">📄 Export PDF</button>
+ <button class="sl-action-btn" id="print-setlist-btn" onclick="printSingleService()">🖨 Print</button>
+ <button class="sl-action-btn" onclick="copySetlistText()">📋 Copy Text</button>
+ <button class="sl-action-btn" onclick="printSingleService()">📄 Export PDF</button>
  </div>
+ </div>
+
 </div>
+<div id="print-month"></div>
+
 
 <!-- ══ ADMIN (EDIT SONGS) VIEW ══ -->
 <div id="admin-view" class="view">
@@ -741,7 +814,7 @@ details summary:hover{color:var(--text2)}
  <button class="reh-btn" onclick="rehTick()">+1</button>
  </div>
  <div id="song-action-row">
- <button class="song-action-btn" id="add-to-setlist-btn" onclick="addToSetlist()">+ Add to Setlist</button>
+ <button class="song-action-btn" id="add-to-setlist-btn" onclick="addToSetlist()">+ Add to Program</button>
  <button class="song-action-btn" onclick="presentCurrentSong()">▶ Present</button>
  <button id="reh-toggle" onclick="toggleRehearsal()">🔁 Rehearse</button>
  <button class="star-btn" id="star-btn" onclick="toggleFavourite()" title="Favourite">☆</button>
@@ -834,7 +907,7 @@ var ROLES = {
 var PERMS = [
  {label:'View songs & lyrics', roles:['admin','leader','member','viewer']},
  {label:'Use Transpose', roles:['admin','leader','member','viewer']},
- {label:'Build Setlist', roles:['admin','leader','member']},
+ {label:'Build Program', roles:['admin','leader','member']},
  {label:'Presentation mode', roles:['admin','leader','member']},
  {label:'Add / edit songs', roles:['admin','leader']},
  {label:'Delete songs', roles:['admin']},
@@ -849,8 +922,30 @@ var defaultUsers = [
 ];
 var users = JSON.parse(localStorage.getItem('ctct-users') || JSON.stringify(defaultUsers));
 
-// Setlist
-var setlist = JSON.parse(localStorage.getItem('ctct-setlist') || '[]');
+// Programs (monthly program builder) - each service is its own saved entry
+function migrateOldSetlist(){
+ var oldSongs = JSON.parse(localStorage.getItem('ctct-setlist') || '[]');
+ if(!oldSongs.length) return [];
+ var prog = {
+   id: 'prog_'+Date.now(),
+   date: localStorage.getItem('ctct-setlist-date') || new Date().toISOString().split('T')[0],
+   title: localStorage.getItem('ctct-setlist-title') || '',
+   notes: localStorage.getItem('ctct-band-notes') || '',
+   songs: oldSongs,
+   createdAt: new Date().toISOString()
+ };
+ localStorage.setItem('ctct-programs', JSON.stringify([prog]));
+ localStorage.removeItem('ctct-setlist');
+ localStorage.removeItem('ctct-setlist-date');
+ localStorage.removeItem('ctct-setlist-title');
+ localStorage.removeItem('ctct-band-notes');
+ return [prog];
+}
+var programsRaw = localStorage.getItem('ctct-programs');
+var programs = programsRaw ? JSON.parse(programsRaw) : migrateOldSetlist();
+var activeProgramId = localStorage.getItem('ctct-active-program-id') || null;
+function getActiveProgram(){ return programs.find(function(p){return p.id===activeProgramId;}) || null; }
+function savePrograms(){ localStorage.setItem('ctct-programs', JSON.stringify(programs)); }
 
 // Current user session
 var currentUser = JSON.parse(sessionStorage.getItem('ctct-session') || 'null');
@@ -882,15 +977,6 @@ function processText(text,s){return text.replace(/\[([^\]]+)\]/g,function(_,c){r
 // INIT
 // ═══════════════════════════════════════════════
 (function init(){
- var d=document.getElementById('setlist-date');
- d.value=localStorage.getItem('ctct-setlist-date')||new Date().toISOString().split('T')[0];
- d.onchange=function(){localStorage.setItem('ctct-setlist-date',this.value);};
- var ti=document.getElementById('setlist-title-input');
- ti.value=localStorage.getItem('ctct-setlist-title')||'';
- ti.oninput=function(){localStorage.setItem('ctct-setlist-title',this.value);};
- var bn=document.getElementById('band-notes');
- bn.value=localStorage.getItem('ctct-band-notes')||'';
- bn.oninput=function(){localStorage.setItem('ctct-band-notes',this.value);};
  updateUserChip();
  renderPermissionsTable();
  fetch('songs_final.json', {cache:'no-store'})
@@ -905,7 +991,7 @@ function processText(text,s){return text.replace(/\[([^\]]+)\]/g,function(_,c){r
  var cpt=SONGS.filter(function(s){return s.source==='cpt';}).length;
  var cdc=SONGS.filter(function(s){return s.source==='cdc';}).length;
  document.getElementById('stats').textContent=SONGS.length+' songs · '+cpt+' English · '+cdc+' Français/Multilingue';
- renderSetlist();
+ renderProgramList();
  buildAlphaBar();
  })
  .catch(function(err){
@@ -1218,12 +1304,134 @@ function deleteSong(){
 // ═══════════════════════════════════════════════
 // SETLIST
 // ═══════════════════════════════════════════════
-function saveSetlist(){localStorage.setItem('ctct-setlist',JSON.stringify(setlist));}
-function updateSetlistBtn(){var btn=document.getElementById('add-to-setlist-btn');var inList=currentSong&&setlist.some(function(s){return s.title===currentSong.title;});btn.innerHTML=inList?'✓ In Setlist':'+ Add to Setlist';btn.classList.toggle('added',inList);}
-function addToSetlist(){if(!currentSong)return;if(setlist.some(function(s){return s.title===currentSong.title;})){showToast('Already in setlist!');return;}setlist.push({title:currentSong.title,key:currentSong.key||''});saveSetlist();renderSetlist();updateSetlistBtn();showToast('Added to setlist ✓');}
-function removeFromSetlist(idx){setlist.splice(idx,1);saveSetlist();renderSetlist();if(currentSong)updateSetlistBtn();}
-function clearSetlist(){if(!confirm('Clear the entire setlist?'))return;setlist=[];saveSetlist();renderSetlist();if(currentSong)updateSetlistBtn();}
+// ═══════════════════════════════════════════════
+// PROGRAM BUILDER - list mode (all services, grouped by month)
+// ═══════════════════════════════════════════════
+function monthKeyOf(dateStr){ return (dateStr||'').slice(0,7); } // 'YYYY-MM'
+function monthLabelOf(monthKey){
+ if(!monthKey) return 'No date';
+ var parts=monthKey.split('-'); var d=new Date(parseInt(parts[0],10), parseInt(parts[1],10)-1, 1);
+ return d.toLocaleDateString('en-ZA',{month:'long',year:'numeric'});
+}
+function showProgramList(){
+ document.getElementById('program-list-mode').style.display='block';
+ document.getElementById('program-edit-mode').style.display='none';
+ activeProgramId=null; localStorage.removeItem('ctct-active-program-id');
+ renderProgramList();
+}
+function showProgramEdit(id){
+ activeProgramId=id; localStorage.setItem('ctct-active-program-id', id);
+ document.getElementById('program-list-mode').style.display='none';
+ document.getElementById('program-edit-mode').style.display='block';
+ var p=getActiveProgram(); if(!p)return;
+ document.getElementById('setlist-date').value=p.date||new Date().toISOString().split('T')[0];
+ document.getElementById('setlist-title-input').value=p.title||'';
+ document.getElementById('band-notes').value=p.notes||'';
+ renderSetlist();
+}
+function createNewProgram(){
+ var p={id:'prog_'+Date.now(), date:new Date().toISOString().split('T')[0], title:'', notes:'', songs:[], createdAt:new Date().toISOString()};
+ programs.push(p); savePrograms();
+ showProgramEdit(p.id);
+}
+function duplicateProgram(id){
+ var src=programs.find(function(p){return p.id===id;}); if(!src)return;
+ var copy=JSON.parse(JSON.stringify(src));
+ copy.id='prog_'+Date.now(); copy.createdAt=new Date().toISOString();
+ // bump the date a week forward as a convenience for recurring services
+ var d=new Date((src.date||new Date().toISOString().split('T')[0])+'T00:00:00');
+ d.setDate(d.getDate()+7);
+ copy.date=d.toISOString().split('T')[0];
+ programs.push(copy); savePrograms();
+ renderProgramList();
+ showToast('Duplicated - new date set 1 week later');
+}
+function deleteProgram(id, evt){
+ if(evt) evt.stopPropagation();
+ if(!confirm('Delete this service and its song list? This cannot be undone.'))return;
+ programs=programs.filter(function(p){return p.id!==id;}); savePrograms();
+ renderProgramList();
+}
+function deleteCurrentProgram(){
+ var p=getActiveProgram(); if(!p)return;
+ if(!confirm('Delete "'+(p.title||'this service')+'"? This cannot be undone.'))return;
+ programs=programs.filter(function(x){return x.id!==p.id;}); savePrograms();
+ showProgramList();
+}
+function renderProgramList(){
+ var wrap=document.getElementById('program-months'), empty=document.getElementById('program-empty');
+ if(!programs.length){ wrap.innerHTML=''; empty.style.display='block'; return; }
+ empty.style.display='none';
+ var sorted=programs.slice().sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
+ var groups={}, order=[];
+ sorted.forEach(function(p){
+   var mk=monthKeyOf(p.date);
+   if(!groups[mk]){ groups[mk]=[]; order.push(mk); }
+   groups[mk].push(p);
+ });
+ wrap.innerHTML=order.map(function(mk){
+   var items=groups[mk];
+   var cards=items.map(function(p){
+     var dateLabel=p.date ? new Date(p.date+'T00:00:00').toLocaleDateString('en-ZA',{weekday:'short',day:'numeric',month:'short'}) : 'No date';
+     return '<div class="program-card" onclick="showProgramEdit(\''+p.id+'\')">'+
+       '<div class="program-card-main">'+
+       '<div class="program-card-date">'+esc(dateLabel)+'</div>'+
+       '<div class="program-card-title">'+esc(p.title||'Untitled service')+'</div>'+
+       '<div class="program-card-count">'+(p.songs?p.songs.length:0)+' song'+((p.songs&&p.songs.length===1)?'':'s')+'</div>'+
+       '</div>'+
+       '<div class="program-card-actions">'+
+       '<button title="Duplicate" onclick="event.stopPropagation();duplicateProgram(\''+p.id+'\')">⧉</button>'+
+       '<button title="Delete" onclick="deleteProgram(\''+p.id+'\',event)">✕</button>'+
+       '</div>'+
+     '</div>';
+   }).join('');
+   return '<div class="program-month-group">'+
+     '<div class="program-month-header"><span>'+esc(monthLabelOf(mk))+'</span>'+
+     '<button class="program-month-export" onclick="exportMonthPDF(\''+mk+'\')">📄 Export Month PDF</button></div>'+
+     cards+
+   '</div>';
+ }).join('');
+}
+
+// ═══════════════════════════════════════════════
+// PROGRAM BUILDER - edit mode (single service, same as before)
+// ═══════════════════════════════════════════════
+function saveSetlist(){
+ var p=getActiveProgram(); if(!p)return;
+ p.date=document.getElementById('setlist-date').value;
+ p.title=document.getElementById('setlist-title-input').value;
+ p.notes=document.getElementById('band-notes').value;
+ savePrograms();
+}
+function updateSetlistBtn(){
+ var btn=document.getElementById('add-to-setlist-btn'); if(!btn)return;
+ var p=getActiveProgram();
+ var inList=currentSong&&p&&p.songs.some(function(s){return s.title===currentSong.title;});
+ btn.innerHTML=inList?'✓ In Program':'+ Add to Program';
+ btn.classList.toggle('added',inList);
+}
+function addToSetlist(){
+ if(!currentSong)return;
+ var p=getActiveProgram();
+ if(!p){
+   // no service open yet - create one for today automatically so the tap always works
+   p={id:'prog_'+Date.now(), date:new Date().toISOString().split('T')[0], title:'', notes:'', songs:[], createdAt:new Date().toISOString()};
+   programs.push(p); activeProgramId=p.id; localStorage.setItem('ctct-active-program-id', p.id);
+   savePrograms();
+ }
+ if(p.songs.some(function(s){return s.title===currentSong.title;})){showToast('Already in this service!');return;}
+ p.songs.push({title:currentSong.title,key:currentSong.key||''});
+ savePrograms(); updateSetlistBtn();
+ showToast('Added to '+(p.title||'service')+' ✓');
+}
+function removeFromSetlist(idx){
+ var p=getActiveProgram(); if(!p)return;
+ p.songs.splice(idx,1); savePrograms(); renderSetlist();
+ if(currentSong)updateSetlistBtn();
+}
 function renderSetlist(){
+ var p=getActiveProgram();
+ var setlist=p?p.songs:[];
  var c=document.getElementById('setlist-list'),e=document.getElementById('setlist-empty');
  if(setlist.length===0){c.innerHTML='';e.style.display='block';return;}
  e.style.display='none';
@@ -1244,17 +1452,59 @@ function renderSetlist(){
  }).join('');
 }
 function copySetlistText(){
+ var p=getActiveProgram(); if(!p){showToast('Open a service first');return;}
  var d=document.getElementById('setlist-date').value||new Date().toLocaleDateString('en-ZA');
  var t=document.getElementById('setlist-title-input').value;
  var notes=document.getElementById('band-notes').value;
  var lines=['CAPE TOWN CHRISTIAN TABERNACLE','CHOIR SONGBOOK – BAND PROGRAM','Date: '+d];
  if(t)lines.push('Service: '+t);
  lines.push('','SETLIST','──────────────────');
- setlist.forEach(function(s,i){lines.push((i+1)+'. '+s.title+(s.key?' ('+s.key+')':''));});
+ p.songs.forEach(function(s,i){lines.push((i+1)+'. '+s.title+(s.key?' ('+s.key+')':''));});
  if(notes.trim())lines.push('','BAND NOTES','──────────────────',notes);
  lines.push('',''+COPYRIGHT);
  navigator.clipboard.writeText(lines.join('\n')).then(function(){showToast('Copied!');}).catch(function(){showToast('Copy failed');});
 }
+
+// ═══════════════════════════════════════════════
+// PROGRAM BUILDER - month PDF export (all services in one month, one document)
+// ═══════════════════════════════════════════════
+function renderPrintServiceBlock(p){
+ var dateLabel=p.date ? new Date(p.date+'T00:00:00').toLocaleDateString('en-ZA',{weekday:'long',year:'numeric',month:'long',day:'numeric'}) : '';
+ var songsHtml=(p.songs||[]).map(function(s,i){
+   return '<div class="print-sl-row">'+(i+1)+'. '+esc(s.title)+(s.key?' <span class="print-sl-key">('+esc(s.key)+')</span>':'')+
+     (s.note?'<div class="print-sl-note">'+esc(s.note)+'</div>':'')+'</div>';
+ }).join('') || '<div class="print-sl-row" style="color:#888">No songs added</div>';
+ return '<div class="print-service-page">'+
+   '<div class="print-header-block"><div class="print-logo-text">CAPE TOWN CHRISTIAN TABERNACLE</div>'+
+   '<h2>'+esc(p.title||'Service')+'</h2><p>'+esc(dateLabel)+'</p></div>'+
+   '<div class="print-sl-list">'+songsHtml+'</div>'+
+   (p.notes&&p.notes.trim() ? '<div class="print-notes"><strong>Band Notes</strong><br>'+esc(p.notes).replace(/\n/g,'<br>')+'</div>' : '')+
+ '</div>';
+}
+function exportMonthPDF(monthKey){
+ var monthPrograms=programs.filter(function(p){return monthKeyOf(p.date)===monthKey;})
+   .sort(function(a,b){return (a.date||'').localeCompare(b.date||'');});
+ if(!monthPrograms.length){showToast('No services in this month');return;}
+ document.getElementById('print-month').innerHTML=monthPrograms.map(renderPrintServiceBlock).join('');
+ document.body.classList.add('printing-month');
+ window.print();
+ setTimeout(function(){
+   document.body.classList.remove('printing-month');
+   document.getElementById('print-month').innerHTML='';
+ },1000);
+}
+function printSingleService(){
+ var p=getActiveProgram();
+ if(!p){showToast('Open a service first');return;}
+ document.getElementById('print-month').innerHTML=renderPrintServiceBlock(p);
+ document.body.classList.add('printing-month');
+ window.print();
+ setTimeout(function(){
+   document.body.classList.remove('printing-month');
+   document.getElementById('print-month').innerHTML='';
+ },1000);
+}
+
 
 // ═══════════════════════════════════════════════
 // PRESENTATION
@@ -1267,16 +1517,17 @@ function buildSlides(song,s){
 }
 function presentCurrentSong(){if(!currentSong)return;presSlides=buildSlides(currentSong,transposeSteps);presIndex=0;document.getElementById('pres-title').textContent=currentSong.title;document.getElementById('pres-key').textContent=currentSong.key?transposeKey(currentSong.key,transposeSteps):'';renderPresSlide();document.getElementById('presentation-overlay').classList.add('active');}
 function startSetlistPresentation(){
- if(!setlist.length){showToast('Add songs to the setlist first!');return;}
+ var p=getActiveProgram();
+ if(!p||!p.songs.length){showToast('Add songs to this service first!');return;}
  presSlides=[];
- setlist.forEach(function(item){
+ p.songs.forEach(function(item){
  var song=SONGS.find(function(s){return s.title===item.title;});if(!song)return;
  presSlides.push({label:'Song',text:song.title,type:'title',isSongTitle:true,song:song.title,key:song.key||''});
  if(song.sections&&song.sections.length)song.sections.forEach(function(sec){presSlides.push({label:sec.label||sec.type||'Verse',text:sec.text.replace(/\[([^\]]+)\]/g,'').trim(),type:sec.type||'verse',song:song.title,key:song.key||''});});
  });
  presIndex=0;
- document.getElementById('pres-title').textContent=setlist[0].title;
- document.getElementById('pres-key').textContent=setlist[0].key||'';
+ document.getElementById('pres-title').textContent=p.songs[0].title;
+ document.getElementById('pres-key').textContent=p.songs[0].key||'';
  renderPresSlide();document.getElementById('presentation-overlay').classList.add('active');
 }
 function renderPresSlide(){
@@ -1838,9 +2089,10 @@ function toggleSlNote(idx){
 }
 
 function saveSlNote(idx,val){
- if(!setlist[idx])return;
- setlist[idx].note=val.trim();
- saveSetlist();
+ var p=getActiveProgram();
+ if(!p||!p.songs[idx])return;
+ p.songs[idx].note=val.trim();
+ savePrograms();
  // Update note button color without full re-render
  var items=document.querySelectorAll('.sl-note-btn');
  if(items[idx])items[idx].classList.toggle('has-note',!!val.trim());
@@ -1951,26 +2203,7 @@ openSong=function(idx){
  if(btn){btn.classList.remove('active');btn.textContent='🔁 Rehearse';}
 };
 
-// ═══════════════════════════════════════════════
-// PDF / PRINT EXPORT
-// ═══════════════════════════════════════════════
-function exportPDF(){
- // For song view - print the song with lyrics
- var songView=document.getElementById('song-view');
- if(songView&&songView.style.display==='block'){
- window.print();
- return;
- }
- // For setlist view - print the setlist
- // Temporarily show any open notes
- document.querySelectorAll('.sl-note-expand').forEach(function(el){el.classList.add('open');});
- window.print();
- setTimeout(function(){
- document.querySelectorAll('.sl-note-expand').forEach(function(el){el.classList.remove('open');});
- },1000);
-}
-
-// Also patch print button in song view action row to use export
+// Recent chips render on load
 document.addEventListener('DOMContentLoaded',function(){
  renderRecentChips();
 });
